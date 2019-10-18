@@ -1,0 +1,8 @@
+ID_WEEKDAY;WEEKDAY_NAME;WEEKDAY_BG
+1;sunday;неделя
+2;monday;понеделник
+3;tuesday;вторник
+4;wednesday;сряда
+5;thursday;четвъртък
+6;friday;петък
+7;saturday;събота

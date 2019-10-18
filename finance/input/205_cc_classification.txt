@@ -1,0 +1,6 @@
+ID_CLASSIFICATION,CLASSIFICATION_COL
+1,Groceries
+4,Infra
+2,Optional
+3,Fuel
+5,Car
