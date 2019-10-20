@@ -9785,8 +9785,8 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'SELECT ',
-'		CARS.FUEL.ID_FUEL,',
-'		 CARS.MAKE || '' '' || CARS.MODEL AS "CAR", ',
+'		FUEL.ID_FUEL,',
+'		CARS.MAKE || '' '' || CARS.MODEL AS "CAR", ',
 '		TO_CHAR(FUEL.DATE_COL, ''YYYY/MM/DD'') as "DATE", ',
 '		KM,',
 '		AMOUNT,',
@@ -9802,12 +9802,12 @@ wwv_flow_api.create_page_plug(
 '		CALENDAR.MONTH_COL AS "MONTH",',
 '		CALENDAR.DAY AS "DAY",',
 '		WEEKDAYS.WEEKDAY_BG AS "WEEKDAY"',
-'    FROM CARS.FUEL',
-'    JOIN CARS.CARS ON CARS.FUEL.ID_CAR=CARS.CARS.ID_CAR',
-'    JOIN CARS.SUPPLIER_FUELS ON CARS.FUEL.ID_BRAND = CARS.SUPPLIER_FUELS.ID_BRAND',
-'    JOIN CARS.DRIVE_TYPE ON CARS.FUEL.ID_DRIVE_TYPE = CARS.DRIVE_TYPE.ID_DRIVE_TYPE',
-'    JOIN CARS.CALENDAR ON CARS.CALENDAR.DATE_COL = CARS.FUEL.DATE_COL',
-'    JOIN CARS.WEEKDAYS ON CARS.WEEKDAYS.ID_WEEKDAY = CARS.CALENDAR.WEEKDAY',
+'    FROM FUEL',
+'    JOIN CARS ON FUEL.ID_CAR=CARS.ID_CAR',
+'    JOIN SUPPLIER_FUELS ON FUEL.ID_BRAND = SUPPLIER_FUELS.ID_BRAND',
+'    JOIN DRIVE_TYPE ON FUEL.ID_DRIVE_TYPE = DRIVE_TYPE.ID_DRIVE_TYPE',
+'    JOIN CALENDAR ON CALENDAR.DATE_COL = FUEL.DATE_COL',
+'    JOIN WEEKDAYS ON WEEKDAYS.ID_WEEKDAY = CALENDAR.WEEKDAY',
 '    ORDER BY FUEL.DATE_COL DESC;'))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_row_template=>1
@@ -10344,7 +10344,7 @@ wwv_flow_api.create_jet_chart_series(
 'FROM',
 '(SELECT',
 '	CEIL(AMOUNT / 5) AS buckets',
-'FROM CARS.FUEL) ',
+'FROM FUEL) ',
 'GROUP BY buckets',
 'ORDER BY buckets;'))
 ,p_items_value_column_name=>'COUNT(BUCKETS)'
@@ -10426,7 +10426,7 @@ wwv_flow_api.create_jet_chart_series(
 'FROM',
 '(SELECT',
 '	CEIL(mileage / 100) AS buckets',
-'FROM CARS.FUEL) ',
+'FROM FUEL) ',
 'GROUP BY buckets',
 'ORDER BY buckets;'))
 ,p_items_value_column_name=>'COUNT(BUCKETS)'
@@ -10506,7 +10506,7 @@ wwv_flow_api.create_jet_chart_series(
 'FROM',
 '(SELECT',
 '	CEIL(PRICE / 0.1) AS buckets',
-'FROM CARS.FUEL) ',
+'FROM FUEL) ',
 'GROUP BY buckets',
 'ORDER BY buckets'))
 ,p_items_value_column_name=>'COUNT(BUCKETS)'
@@ -12384,7 +12384,7 @@ wwv_flow_api.create_page_plug(
 '    MILEAGE, ',
 '    PREDICTED_MILEAGE, ',
 '    L_100_KM ',
-'    FROM CARS.FUEL_CONSUMPTION_PREDICTION;',
+'    FROM FUEL_CONSUMPTION_PREDICTION;',
 ''))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
