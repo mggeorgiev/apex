@@ -404,9 +404,24 @@ begin
     select "OWNER_SEQ".nextval into :NEW."ID" from sys.dual; 
   end if; 
 end; 
-
 /
 ALTER TRIGGER  "BI_OWNER" ENABLE
+/
+CREATE OR REPLACE TRIGGER "FUEL_APP_T1"
+  AFTER insert on "FUEL_APP"
+  for each row
+  follows "FUEL_APP_CALENDAR"
+begin
+INSERT INTO FUEL 
+	  (ID_FUEL, ID_CAR, DATE_COL, KM, AMOUNT, PRICE, TOTAL, ID_BRAND, ID_DRIVE_TYPE, YEAR_COL, MONTH_COL, DAY_COL, WEEKDAY_COL) 
+        SELECT 
+            :new.ID_FUEL, :new.ID_CAR, :new.DATE_COL, :new.KM, :new.AMOUNT, :new.PRICE, :new.TOTAL, :new.ID_BRAND, :new.ID_DRIVE_TYPE, 
+            EXTRACT(year FROM :new.DATE_COL),EXTRACT(month FROM :new.DATE_COL), EXTRACT(day FROM :new.DATE_COL),
+            TO_NUMBER(TO_CHAR(:new.DATE_COL, 'd'))
+        FROM DUAL;
+end;
+/
+ALTER TRIGGER  "FUEL_APP_T1" ENABLE
 /
 CREATE OR REPLACE TRIGGER  "BI_FUEL_APP" 
   before insert on "FUEL_APP"               
