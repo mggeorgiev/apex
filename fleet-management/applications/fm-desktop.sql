@@ -678,7 +678,7 @@ wwv_flow_api.create_list_of_values(
 'SELECT',
 '	CONCAT(MAKE, CONCAT('' '', MODEL)) AS NAME',
 '	,ID_CAR',
-'	FROM CARS.CARS',
+'	FROM CARS',
 '    WHERE ACTIVE = 1',
 '    ORDER BY NAME;',
 ''))
@@ -9453,7 +9453,7 @@ wwv_flow_api.create_page_item(
 'SELECT',
 '	CONCAT(MAKE, CONCAT('' '', MODEL)) AS NAME',
 '	,ID_CAR',
-'	FROM CARS.CARS',
+'	FROM CARS',
 '    WHERE ACTIVE = 1',
 '    ORDER BY NAME;',
 ''))
@@ -10938,7 +10938,7 @@ wwv_flow_api.create_page_item(
 'SELECT',
 '	CONCAT(MAKE, CONCAT('' '', MODEL)) AS NAME',
 '	,ID_CAR',
-'	FROM CARS.CARS',
+'	FROM CARS',
 '    WHERE ACTIVE = 1',
 '    ORDER BY NAME;',
 ''))
