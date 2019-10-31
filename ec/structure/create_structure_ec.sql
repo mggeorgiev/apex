@@ -260,14 +260,14 @@ CREATE INDEX  "ROLES_IDX1" ON  "ROLES" ("ROLE_ID", "ROLE_NAME")
 /
 CREATE OR REPLACE PROCEDURE  "UPDATE_MRZ" is
 begin
-UPDATE EC.ART50 t1
+UPDATE ART50 t1
    SET t1.VALID_TILL =
        (WITH ART50_lead AS (
        						SELECT 
        							ID,
        							tt.VALID_FROM AS vf,
 								LEAD(VALID_FROM,1) OVER (ORDER BY VALID_FROM)-1 AS vt
-                            FROM EC.ART50 tt)       
+                            FROM ART50 tt)       
            SELECT t2.vt
            FROM ART50_lead t2
            WHERE t1.VALID_FROM = t2.vf 
@@ -291,8 +291,7 @@ end;
 /
  CREATE SEQUENCE   "ART50_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE
 /
- CREATE SEQUENCE   "APEX$_WS_SEQ"  MINVALUE 100 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 100 CACHE 20 NOORDER  NOCYCLE
-/
+
 CREATE OR REPLACE TRIGGER  "bi_NMW" 
   before insert on "NMW"              
   for each row 
@@ -411,18 +410,31 @@ ALTER TRIGGER  "BI_ART50" ENABLE
 
 /
 CREATE OR REPLACE FORCE VIEW  "DUPLICATES" ("ID_COMPLEX", "COUNT") AS 
-  select ID_COMPLEX, count(ID_COMPLEX) AS "COUNT"from INCOME_LOGgroup by ID_COMPLEXhaving count (ID_COMPLEX) > 1ORDER BY ID_COMPLEX DESC
+  select 
+        ID_COMPLEX, 
+        count(ID_COMPLEX) AS "COUNT"
+    from INCOME_LOG
+    group by ID_COMPLEX
+    having count (ID_COMPLEX) > 1
+    ORDER BY ID_COMPLEX DESC
 /
 CREATE OR REPLACE FORCE VIEW  "EC_EXPENSES_SORTED" ("ID", "YEAR_EXP", "MONTH_EXP", "DATE_EXP", "REFERENCE", "ID_SUPPLIER", "TOTAL", "METHOD_ID", "HABITANTS_NUMBER", "HABITANTS", "BUILDING_ID") AS 
   SELECT 
     "ID","YEAR_EXP","MONTH_EXP","DATE_EXP","REFERENCE","ID_SUPPLIER","TOTAL","METHOD_ID","HABITANTS_NUMBER","HABITANTS","BUILDING_ID"
 FROM
-    EC.EXPENSES_LOG
+    EXPENSES_LOG
 ORDER BY DATE_EXP DESC
 /
 CREATE OR REPLACE FORCE VIEW  "EC_INCOME_SORTED" ("ID", "Година", "Месец", "Етаж", "ап.", "ЕС", "Фамилия", "Общо", "РИО", "бр. жив", "чл. 51", "доп.", "ток ас. ап.", "ток ст. ап.", "такса ас. ап.", "почистване ап.", "тек. разходи ап.", "баланс", "ток ас.", "ток ст.", "такса ас.", "почистване", "тек. разходи", "ID_COMPLEX") AS 
-  	ID AS "ID", 	YEAR_INC AS "Година",	MONTH_INC AS "Месец",	FLOOR_INC AS "Етаж", 	EC.INCOME_LOG.AP_ID AS "ап.",	EC.INCOME_LOG.BUILDING_ID AS "ЕС", 	EC.HOUSEHOLDS.HOUSEHOLD AS "Фамилия",	AMOUNT AS "Общо",	RIO AS "РИО",	HAB_NUMBER AS "бр. жив", 	ART_51 AS "чл. 51",	MANAGEMENT_COST AS "доп.", 	ELECTR_ELEVATOR_AP AS "ток ас. ап.",	ELECTR_STAIRCASE_AP AS "ток ст. ап.", 	TAX_ELEVATOR_AP AS "такса ас. ап.", 	CLEANER_AP AS "почистване ап.", 	RUN_COST_AP AS "тек. разходи ап.", 	BALANCE AS "баланс", 	ELECTR_ELEVATOR  AS "ток ас.", 	ELECTR_STAIRCASE AS "ток ст.", 	TAX_ELEVATOR AS "такса ас.", 	CLEANER AS "почистване", 	RUN_COST AS "тек. разходи", 	ID_COMPLEXFROM EC.INCOME_LOGJOIN EC.HOUSEHOLDSON EC.INCOME_LOG.ID_HOUSEHOLD = EC.HOUSEHOLDS."id_household"ORDER BY YEAR_INC DESC, MONTH_INC DESC, FLOOR_INC
+  	SELECT 
+        ID AS "ID",
+        YEAR_INC AS "Година",
+        MONTH_INC AS "Месец",
+        FLOOR_INC AS "Етаж",
+        INCOME_LOG.AP_ID AS "ап.",
+        INCOME_LOG.BUILDING_ID AS "ЕС",
+        HOUSEHOLDS.HOUSEHOLD AS "Фамилия",	AMOUNT AS "Общо",	RIO AS "РИО",	HAB_NUMBER AS "бр. жив", 	ART_51 AS "чл. 51",	MANAGEMENT_COST AS "доп.", 	ELECTR_ELEVATOR_AP AS "ток ас. ап.",	ELECTR_STAIRCASE_AP AS "ток ст. ап.", 	TAX_ELEVATOR_AP AS "такса ас. ап.", 	CLEANER_AP AS "почистване ап.", 	RUN_COST_AP AS "тек. разходи ап.", 	BALANCE AS "баланс", 	ELECTR_ELEVATOR  AS "ток ас.", 	ELECTR_STAIRCASE AS "ток ст.", 	TAX_ELEVATOR AS "такса ас.", 	CLEANER AS "почистване", 	RUN_COST AS "тек. разходи", 	ID_COMPLEXFROM INCOME_LOGJOIN HOUSEHOLDSON INCOME_LOG.ID_HOUSEHOLD = HOUSEHOLDS."id_household"ORDER BY YEAR_INC DESC, MONTH_INC DESC, FLOOR_INC
 /
 CREATE OR REPLACE FORCE VIEW  "EC_REPORT" ("Година", "Месец", "Общо", "Ток стълби", "Ток асансьор", "Такса асансьор", "Почистване", "Текущи разходи") AS 
-  YEAR_INC AS "Година", MONTH_INC AS "Месец", ROUND(SUM(AMOUNT),2) AS "Общо", ROUND(SUM(ELECTR_STAIRCASE_AP),2) AS "Ток стълби", ROUND(SUM(ELECTR_ELEVATOR_AP),2) AS "Ток асансьор", ROUND(SUM(TAX_ELEVATOR_AP),2) AS "Такса асансьор",ROUND(SUM(CLEANER_AP),2) AS "Почистване",ROUND(SUM(RUN_COST_AP),2) AS "Текущи разходи"FROM EC.INCOME_LOGGROUP BY YEAR_INC , MONTH_INCORDER BY YEAR_INC DESC, MONTH_INC
+  YEAR_INC AS "Година", MONTH_INC AS "Месец", ROUND(SUM(AMOUNT),2) AS "Общо", ROUND(SUM(ELECTR_STAIRCASE_AP),2) AS "Ток стълби", ROUND(SUM(ELECTR_ELEVATOR_AP),2) AS "Ток асансьор", ROUND(SUM(TAX_ELEVATOR_AP),2) AS "Такса асансьор",ROUND(SUM(CLEANER_AP),2) AS "Почистване",ROUND(SUM(RUN_COST_AP),2) AS "Текущи разходи"FROM INCOME_LOGGROUP BY YEAR_INC , MONTH_INCORDER BY YEAR_INC DESC, MONTH_INC
 /
