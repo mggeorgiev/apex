@@ -27,7 +27,7 @@ prompt APPLICATION 106 - FLEET MANAGEMENT
 -- Application Export:
 --   Application:     106
 --   Name:            FLEET MANAGEMENT
---   Date and Time:   08:14 Sunday October 20, 2019
+--   Date and Time:   06:35 Thursday October 31, 2019
 --   Exported By:     GEORGIEM
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -85,7 +85,7 @@ begin
 wwv_flow_api.create_flow(
  p_id=>wwv_flow.g_flow_id
 ,p_display_id=>nvl(wwv_flow_application_install.get_application_id,106)
-,p_owner=>nvl(wwv_flow_application_install.get_schema,'FLEET')
+,p_owner=>nvl(wwv_flow_application_install.get_schema,'CARS')
 ,p_name=>nvl(wwv_flow_application_install.get_application_name,'FLEET MANAGEMENT')
 ,p_alias=>nvl(wwv_flow_application_install.get_application_alias,'F_106')
 ,p_page_view_logging=>'YES'
@@ -112,7 +112,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20190819134825'
+,p_last_upd_yyyymmddhh24miss=>'20191030194427'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -129,7 +129,8 @@ wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(14814306512054314)
 ,p_list_item_display_sequence=>10
 ,p_list_item_link_text=>'Home'
-,p_list_item_link_target=>'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:'
+,p_list_item_link_target=>'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::::'
+,p_list_item_icon=>'fa-home'
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'1,2,3,4,7'
 );
@@ -137,7 +138,8 @@ wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(14899829782142873)
 ,p_list_item_display_sequence=>20
 ,p_list_item_link_text=>'INPUTS'
-,p_list_item_link_target=>'f?p=&APP_ID.:11:&SESSION.::&DEBUG.'
+,p_list_item_link_target=>'f?p=&APP_ID.:11:&SESSION.::&DEBUG.::::'
+,p_list_item_icon=>'fa-apex'
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'11,2,2,6,8'
 );
@@ -164,6 +166,7 @@ wwv_flow_api.create_list_item(
 ,p_list_item_display_sequence=>100
 ,p_list_item_link_text=>'REPORTS'
 ,p_list_item_link_target=>'f?p=&APP_ID.:3:&SESSION.::&DEBUG.::::'
+,p_list_item_icon=>'fa-calendar-chart'
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'3,13,5,14,18,22,17,24,25'
 );
@@ -237,6 +240,7 @@ wwv_flow_api.create_list_item(
 ,p_list_item_display_sequence=>200
 ,p_list_item_link_text=>'MANAGEMENT'
 ,p_list_item_link_target=>'f?p=&APP_ID.:12:&SESSION.::&DEBUG.::::'
+,p_list_item_icon=>'fa-thumbs-o-up'
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'12,9,15,28,17'
 );
@@ -272,6 +276,7 @@ wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(17685373721585746)
 ,p_list_item_display_sequence=>300
 ,p_list_item_link_text=>'GRAPHS'
+,p_list_item_icon=>'fa-area-chart'
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list_item(
@@ -279,6 +284,7 @@ wwv_flow_api.create_list_item(
 ,p_list_item_display_sequence=>310
 ,p_list_item_link_text=>'HISTOGRAMS'
 ,p_list_item_link_target=>'f?p=&APP_ID.:6:&SESSION.::&DEBUG.::::'
+,p_list_item_icon=>'fa-bar-chart'
 ,p_parent_list_item_id=>wwv_flow_api.id(17685373721585746)
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'6'
@@ -314,6 +320,7 @@ wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(17728671044465938)
 ,p_list_item_display_sequence=>400
 ,p_list_item_link_text=>'PREDICTIONS'
+,p_list_item_icon=>'fa-arrows'
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list_item(
@@ -9338,7 +9345,7 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'C'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20190815094803'
+,p_last_upd_yyyymmddhh24miss=>'20191030194038'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(15039550685062284)
@@ -9785,8 +9792,8 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'SELECT ',
-'		FUEL.ID_FUEL,',
-'		CARS.MAKE || '' '' || CARS.MODEL AS "CAR", ',
+'		CARS.FUEL.ID_FUEL,',
+'		 CARS.MAKE || '' '' || CARS.MODEL AS "CAR", ',
 '		TO_CHAR(FUEL.DATE_COL, ''YYYY/MM/DD'') as "DATE", ',
 '		KM,',
 '		AMOUNT,',
@@ -9802,12 +9809,12 @@ wwv_flow_api.create_page_plug(
 '		CALENDAR.MONTH_COL AS "MONTH",',
 '		CALENDAR.DAY AS "DAY",',
 '		WEEKDAYS.WEEKDAY_BG AS "WEEKDAY"',
-'    FROM FUEL',
-'    JOIN CARS ON FUEL.ID_CAR=CARS.ID_CAR',
-'    JOIN SUPPLIER_FUELS ON FUEL.ID_BRAND = SUPPLIER_FUELS.ID_BRAND',
-'    JOIN DRIVE_TYPE ON FUEL.ID_DRIVE_TYPE = DRIVE_TYPE.ID_DRIVE_TYPE',
-'    JOIN CALENDAR ON CALENDAR.DATE_COL = FUEL.DATE_COL',
-'    JOIN WEEKDAYS ON WEEKDAYS.ID_WEEKDAY = CALENDAR.WEEKDAY',
+'    FROM CARS.FUEL',
+'    JOIN CARS.CARS ON CARS.FUEL.ID_CAR=CARS.CARS.ID_CAR',
+'    JOIN CARS.SUPPLIER_FUELS ON CARS.FUEL.ID_BRAND = CARS.SUPPLIER_FUELS.ID_BRAND',
+'    JOIN CARS.DRIVE_TYPE ON CARS.FUEL.ID_DRIVE_TYPE = CARS.DRIVE_TYPE.ID_DRIVE_TYPE',
+'    JOIN CARS.CALENDAR ON CARS.CALENDAR.DATE_COL = CARS.FUEL.DATE_COL',
+'    JOIN CARS.WEEKDAYS ON CARS.WEEKDAYS.ID_WEEKDAY = CARS.CALENDAR.WEEKDAY',
 '    ORDER BY FUEL.DATE_COL DESC;'))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_row_template=>1
@@ -10344,7 +10351,7 @@ wwv_flow_api.create_jet_chart_series(
 'FROM',
 '(SELECT',
 '	CEIL(AMOUNT / 5) AS buckets',
-'FROM FUEL) ',
+'FROM CARS.FUEL) ',
 'GROUP BY buckets',
 'ORDER BY buckets;'))
 ,p_items_value_column_name=>'COUNT(BUCKETS)'
@@ -10426,7 +10433,7 @@ wwv_flow_api.create_jet_chart_series(
 'FROM',
 '(SELECT',
 '	CEIL(mileage / 100) AS buckets',
-'FROM FUEL) ',
+'FROM CARS.FUEL) ',
 'GROUP BY buckets',
 'ORDER BY buckets;'))
 ,p_items_value_column_name=>'COUNT(BUCKETS)'
@@ -10506,7 +10513,7 @@ wwv_flow_api.create_jet_chart_series(
 'FROM',
 '(SELECT',
 '	CEIL(PRICE / 0.1) AS buckets',
-'FROM FUEL) ',
+'FROM CARS.FUEL) ',
 'GROUP BY buckets',
 'ORDER BY buckets'))
 ,p_items_value_column_name=>'COUNT(BUCKETS)'
@@ -10827,7 +10834,7 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'C'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20190330081647'
+,p_last_upd_yyyymmddhh24miss=>'20191030194038'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(16556806948701227)
@@ -12384,7 +12391,7 @@ wwv_flow_api.create_page_plug(
 '    MILEAGE, ',
 '    PREDICTED_MILEAGE, ',
 '    L_100_KM ',
-'    FROM FUEL_CONSUMPTION_PREDICTION;',
+'    FROM CARS.FUEL_CONSUMPTION_PREDICTION;',
 ''))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
