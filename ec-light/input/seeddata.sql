@@ -71,23 +71,22 @@ Insert into NMW (ID,VALIDFROM,VALIDTILL,MONTHLY,HOURLY,ACT) values (161,to_date(
 Insert into NMW (ID,VALIDFROM,VALIDTILL,MONTHLY,HOURLY,ACT) values (162,to_date('01-JAN-68','DD-MON-RR'),to_date('31-DEC-69','DD-MON-RR'),60,null,'ПМС № 63/1967 г.');
 Insert into NMW (ID,VALIDFROM,VALIDTILL,MONTHLY,HOURLY,ACT) values (163,to_date('10-JAN-66','DD-MON-RR'),to_date('12-JAN-67','DD-MON-RR'),55,null,'ПМС № 53/1965 г.');
 
-Insert into ROLES (ROLE_ID,ROLE_NAME) values (1,'собственик');
-Insert into ROLES (ROLE_ID,ROLE_NAME) values (2,'обитател');
-Insert into ROLES (ROLE_ID,ROLE_NAME) values (3,'управител');
-Insert into ROLES (ROLE_ID,ROLE_NAME) values (4,'касиер');
-Insert into ROLES (ROLE_ID,ROLE_NAME) values (5,'контрольор');
+INSERT INTO CALCULATION (CALCULATION) VALUES ('на брой жив.');
+INSERT INTO CALCULATION (CALCULATION) VALUES ('на идеална част');
+INSERT INTO CALCULATION (CALCULATION) VALUES ('на % от живущи');
+INSERT INTO CALCULATION (CALCULATION) VALUES ('на апартамент');
 
-Insert into CALC_METHOD (METHOD_ID,METHOD_EXP) values (3,'на идеална част');
-Insert into CALC_METHOD (METHOD_ID,METHOD_EXP) values (4,'на % от живущи');
-Insert into CALC_METHOD (METHOD_ID,METHOD_EXP) values (2,'на апартамент');
-Insert into CALC_METHOD (METHOD_ID,METHOD_EXP) values (1,'на брой жив.');
+Insert into ENTRANCE (ID,NAME) values (1,'А');
+Insert into ENTRANCE (ID,NAME) values (2,'Б');
+Insert into ENTRANCE (ID,NAME) values (3,'В');
+Insert into ENTRANCE (ID,NAME) values (4,'Г');
+Insert into ENTRANCE (ID,NAME) values (5,'Д');
+Insert into ENTRANCE (ID,NAME) values (6,'Е');
+Insert into ENTRANCE (ID,NAME) values (7,'Ж');
+Insert into ENTRANCE (ID,NAME) values (8,'З');
+Insert into ENTRANCE (ID,NAME) values (9,'И');
 
-Insert into ENTRANCE (ENTRANCE_ID,ENTRANCE_NAME) values (1,'А');
-Insert into ENTRANCE (ENTRANCE_ID,ENTRANCE_NAME) values (2,'Б');
-Insert into ENTRANCE (ENTRANCE_ID,ENTRANCE_NAME) values (3,'В');
-Insert into ENTRANCE (ENTRANCE_ID,ENTRANCE_NAME) values (4,'Г');
-Insert into ENTRANCE (ENTRANCE_ID,ENTRANCE_NAME) values (5,'Д');
-Insert into ENTRANCE (ENTRANCE_ID,ENTRANCE_NAME) values (6,'Е');
-Insert into ENTRANCE (ENTRANCE_ID,ENTRANCE_NAME) values (7,'Ж');
-Insert into ENTRANCE (ENTRANCE_ID,ENTRANCE_NAME) values (8,'З');
-Insert into ENTRANCE (ENTRANCE_ID,ENTRANCE_NAME) values (9,'И');
+INSERT INTO EXPENSE_TYPE (EXPENSE, CALCULATION) SELECT 'РИО', (SELECT ID FROM CALCULATION WHERE CALCULATION = 'на идеална част') FROM DUAL;
+INSERT INTO EXPENSE_TYPE (EXPENSE, CALCULATION) SELECT 'Ток Асансьор', (SELECT ID FROM CALCULATION WHERE CALCULATION = 'на брой жив.') FROM DUAL;
+INSERT INTO EXPENSE_TYPE (EXPENSE, CALCULATION) SELECT 'Ток Стъбли', (SELECT ID FROM CALCULATION WHERE CALCULATION = 'на брой жив.') FROM DUAL;
+INSERT INTO EXPENSE_TYPE (EXPENSE, CALCULATION) SELECT 'Такса Асансьор', (SELECT ID FROM CALCULATION WHERE CALCULATION = 'на брой жив.') FROM DUAL;
