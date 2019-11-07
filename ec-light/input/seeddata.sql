@@ -92,4 +92,3 @@ Insert into ENTRANCE (ID,NAME) values (7,'Ж');
 Insert into ENTRANCE (ID,NAME) values (8,'З');
 Insert into ENTRANCE (ID,NAME) values (9,'И');
 
-INSERT INTO BUILDING (NAME, ENTRANCE, POST_CODE) VALUES ('Примерна Сграда', '5', '1359');
