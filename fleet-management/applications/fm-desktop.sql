@@ -27,7 +27,7 @@ prompt APPLICATION 106 - FLEET MANAGEMENT
 -- Application Export:
 --   Application:     106
 --   Name:            FLEET MANAGEMENT
---   Date and Time:   06:35 Thursday October 31, 2019
+--   Date and Time:   15:01 Tuesday November 19, 2019
 --   Exported By:     GEORGIEM
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -42,7 +42,7 @@ prompt APPLICATION 106 - FLEET MANAGEMENT
 --     Processes:               28
 --     Regions:                 38
 --     Buttons:                 35
---     Dynamic Actions:         13
+--     Dynamic Actions:         12
 --   Shared Components:
 --     Logic:
 --     Navigation:
@@ -112,7 +112,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20191030194427'
+,p_last_upd_yyyymmddhh24miss=>'20191119145858'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -355,6 +355,7 @@ wwv_flow_api.create_list_item(
 ,p_list_item_display_sequence=>500
 ,p_list_item_link_text=>'Access Control'
 ,p_list_item_link_target=>'f?p=&APP_ID.:16:&SESSION.::&DEBUG.::::'
+,p_list_item_icon=>'fa-lock'
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'16'
 );
@@ -9780,7 +9781,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20190815100526'
+,p_last_upd_yyyymmddhh24miss=>'20191115101959'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(14869105436977594)
@@ -9793,7 +9794,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'SELECT ',
 '		FUEL.ID_FUEL,',
-'		 CARS.MAKE || '' '' || CARS.MODEL AS "CAR", ',
+'		CARS.MAKE || '' '' || CARS.MODEL AS "CAR", ',
 '		TO_CHAR(FUEL.DATE_COL, ''YYYY/MM/DD'') as "DATE", ',
 '		KM,',
 '		AMOUNT,',
@@ -10091,20 +10092,11 @@ wwv_flow_api.create_page_da_action(
 ,p_stop_execution_on_error=>'Y'
 ,p_wait_for_result=>'Y'
 );
-wwv_flow_api.create_page_da_event(
- p_id=>wwv_flow_api.id(17724618159454941)
-,p_name=>'Refresh'
-,p_event_sequence=>20
-,p_triggering_element_type=>'BUTTON'
-,p_triggering_button_id=>wwv_flow_api.id(17724151451454936)
-,p_bind_type=>'bind'
-,p_bind_event_type=>'click'
-);
 wwv_flow_api.create_page_da_action(
- p_id=>wwv_flow_api.id(17724732973454942)
-,p_event_id=>wwv_flow_api.id(17724618159454941)
+ p_id=>wwv_flow_api.id(21273552927985027)
+,p_event_id=>wwv_flow_api.id(17724452009454939)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>10
+,p_action_sequence=>20
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
@@ -10302,7 +10294,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20190403145917'
+,p_last_upd_yyyymmddhh24miss=>'20191031120631'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(17659730202927013)
@@ -10351,7 +10343,7 @@ wwv_flow_api.create_jet_chart_series(
 'FROM',
 '(SELECT',
 '	CEIL(AMOUNT / 5) AS buckets',
-'FROM CARS.FUEL) ',
+'FROM FUEL) ',
 'GROUP BY buckets',
 'ORDER BY buckets;'))
 ,p_items_value_column_name=>'COUNT(BUCKETS)'
@@ -10433,7 +10425,7 @@ wwv_flow_api.create_jet_chart_series(
 'FROM',
 '(SELECT',
 '	CEIL(mileage / 100) AS buckets',
-'FROM CARS.FUEL) ',
+'FROM FUEL) ',
 'GROUP BY buckets',
 'ORDER BY buckets;'))
 ,p_items_value_column_name=>'COUNT(BUCKETS)'
@@ -10513,7 +10505,7 @@ wwv_flow_api.create_jet_chart_series(
 'FROM',
 '(SELECT',
 '	CEIL(PRICE / 0.1) AS buckets',
-'FROM CARS.FUEL) ',
+'FROM FUEL) ',
 'GROUP BY buckets',
 'ORDER BY buckets'))
 ,p_items_value_column_name=>'COUNT(BUCKETS)'
@@ -11166,7 +11158,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20190327151436'
+,p_last_upd_yyyymmddhh24miss=>'20191119145858'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(16385762067723535)
@@ -11543,10 +11535,10 @@ wwv_flow_api.create_page_da_action(
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'DELETE FROM ',
-'    CARS.MAINTENANCE_PRP',
-'WHERE ID IN (SELECT ID_MAINTENANCE FROM CARS.MAINTENANCE);',
+'    MAINTENANCE_PRP',
+'WHERE ID IN (SELECT ID_MAINTENANCE FROM MAINTENANCE);',
 '',
-'INSERT INTO CALENDAR (DATE_COL) (SELECT ДАТА FROM CARS.MAINTENANCE_PRP MINUS SELECT DATE_COL FROM CARS.CALENDAR);'))
+'INSERT INTO CALENDAR (DATE_COL) (SELECT ДАТА FROM MAINTENANCE_PRP MINUS SELECT DATE_COL FROM CALENDAR);'))
 ,p_stop_execution_on_error=>'Y'
 ,p_wait_for_result=>'Y'
 );
@@ -11577,39 +11569,14 @@ wwv_flow_api.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'DELETE FROM ',
-'    CARS.MAINTENANCE_PRP',
-'WHERE ID IN (SELECT ID_MAINTENANCE FROM CARS.MAINTENANCE);',
-'',
-'INSERT INTO CALENDAR (DATE_COL) (SELECT ДАТА FROM CARS.MAINTENANCE_PRP MINUS SELECT DATE_COL FROM CARS.CALENDAR);',
-'',
-'INSERT INTO CARS.MAINTENANCE',
-'(',
-'ID_MAINTENANCE,',
-'ID_CAR,',
-'DATE_COL,',
-'MILEAGE, ',
-'REFERENCE,',
-'TOTAL,',
-'INTERVAL_COL,',
-'ID_CLASSIFICATION,',
-'PRICE_PER_KM)',
-'SELECT',
-'	ID, ',
-'	CAR,',
-'	ДАТА, ',
-'	КИЛОМЕТРИ, ',
-'	ЗАБЕЛЕЖКА, ',
-'	REPLACE(ЦЕНА, '' лв.''), ',
-'	КИЛОМЕТРИ - (SELECT MAX(MILEAGE) FROM MAINTENANCE WHERE MAINTENANCE.ID_CAR = mp.CAR AND REFERENCE = mp.ЗАБЕЛЕЖКА ) AS interval,',
-'	КЛАСИФИКАЦИЯ,',
-'    ROUND(ЦЕНА/(КИЛОМЕТРИ - (SELECT MAX(MILEAGE) FROM MAINTENANCE WHERE MAINTENANCE.ID_CAR = mp.CAR AND REFERENCE = mp.ЗАБЕЛЕЖКА )),2)',
-'FROM CARS.MAINTENANCE_PRP mp',
-'ORDER BY ДАТА DESC;',
-'',
-'DELETE FROM ',
-'    CARS.MAINTENANCE_PRP',
-'WHERE ID IN (SELECT ID_MAINTENANCE FROM CARS.MAINTENANCE);'))
+'BEGIN',
+'    CLEAN_MAINTENANCE_PRP;',
+'    ',
+'    ETL_MAINTENANCE;',
+'    UPDARE_MAINTENANCE_INTERVAL;',
+'    ',
+'    CLEAN_MAINTENANCE_PRP;',
+'END;'))
 ,p_stop_execution_on_error=>'Y'
 ,p_wait_for_result=>'Y'
 );
@@ -12212,7 +12179,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20190414014200'
+,p_last_upd_yyyymmddhh24miss=>'20191031121611'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(17096894600502723)
@@ -12391,7 +12358,7 @@ wwv_flow_api.create_page_plug(
 '    MILEAGE, ',
 '    PREDICTED_MILEAGE, ',
 '    L_100_KM ',
-'    FROM CARS.FUEL_CONSUMPTION_PREDICTION;',
+'    FROM FUEL_CONSUMPTION_PREDICTION;',
 ''))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -13879,7 +13846,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20190404130714'
+,p_last_upd_yyyymmddhh24miss=>'20191031120829'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(17660831102927024)
@@ -13931,9 +13898,9 @@ wwv_flow_api.create_jet_chart_series(
 '     ROUND(MEDIAN(price),2) AS "MEDIAN FUEL PRICE",',
 '     ROUND(STDDEV(price),2) AS "STDDEV FUEL PRICE"',
 '     FROM',
-'         CARS.FUEL',
-'     JOIN CARS.CALENDAR ON CARS.CALENDAR.DATE_COL = CARS.FUEL.DATE_COL',
-'     WHERE CARS.FUEL.DATE_COL > add_months( trunc(sysdate, ''MM''), -12 )',
+'         FUEL',
+'     JOIN CALENDAR ON CALENDAR.DATE_COL = FUEL.DATE_COL',
+'     WHERE FUEL.DATE_COL > add_months( trunc(sysdate, ''MM''), -12 )',
 '     GROUP BY CALENDAR.MONTH_COL, CALENDAR.YEAR_COL      ',
 '     ORDER BY CALENDAR.YEAR_COL, CALENDAR.MONTH_COL;'))
 ,p_items_value_column_name=>'AVG FUEL PRICE'
@@ -14017,8 +13984,8 @@ wwv_flow_api.create_jet_chart_series(
 '     ROUND(MEDIAN(price),2) AS "MEDIAN FUEL PRICE",',
 '     ROUND(STDDEV(price),2) AS "STDDEV FUEL PRICE"',
 '     FROM',
-'         CARS.FUEL',
-'     JOIN CARS.CALENDAR ON CARS.CALENDAR.DATE_COL = CARS.FUEL.DATE_COL',
+'         FUEL',
+'     JOIN CALENDAR ON CALENDAR.DATE_COL = FUEL.DATE_COL',
 '     GROUP BY CALENDAR.YEAR_COL      ',
 '     ORDER BY CALENDAR.YEAR_COL;'))
 ,p_series_type=>'barRange'
@@ -14166,7 +14133,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20190712114153'
+,p_last_upd_yyyymmddhh24miss=>'20191031121402'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(17662729693927043)
@@ -14219,9 +14186,9 @@ wwv_flow_api.create_jet_chart_series(
 '     ROUND(STDDEV(total),2) AS "STDDEV FUEL EXPENSES",',
 '     ROUND(SUM(total),2) AS TOTAL',
 '     FROM',
-'         CARS.FUEL',
-'     JOIN CARS.CALENDAR ON CARS.CALENDAR.DATE_COL = CARS.FUEL.DATE_COL',
-'     WHERE CARS.FUEL.DATE_COL > add_months( trunc(sysdate, ''MM''), -12 )',
+'         FUEL',
+'     JOIN CALENDAR ON CALENDAR.DATE_COL = FUEL.DATE_COL',
+'     WHERE FUEL.DATE_COL > add_months( trunc(sysdate, ''MM''), -12 )',
 '     GROUP BY CALENDAR.MONTH_COL, CALENDAR.YEAR_COL      ',
 '     ORDER BY CALENDAR.YEAR_COL, CALENDAR.MONTH_COL;'))
 ,p_items_value_column_name=>'TOTAL'
@@ -14298,8 +14265,8 @@ wwv_flow_api.create_jet_chart_series(
 'SELECT',
 '        CALENDAR.YEAR_COL,',
 '        ROUND(SUM(TOTAL),2) AS "TOTAL FUEL SPENT"',
-'    FROM CARS.FUEL    ',
-'    JOIN CARS.CALENDAR ON CARS.CALENDAR.DATE_COL = CARS.FUEL.DATE_COL',
+'    FROM FUEL    ',
+'    JOIN CALENDAR ON CALENDAR.DATE_COL = FUEL.DATE_COL',
 '    group by    CALENDAR.YEAR_COL   ',
 '    ORDER BY    CALENDAR.YEAR_COL'))
 ,p_series_type=>'bar'
