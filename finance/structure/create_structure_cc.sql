@@ -417,3 +417,89 @@ CREATE OR REPLACE FORCE VIEW  "CREDIT_CARD_TYPE_YEAR" ("YEAR", "TYPE", "TRANSACT
     GROUP BY YEAR_CC, ct.TYPE_COL
     ORDER BY YEAR_CC DESC, "SUM Debit" DESC
 /
+
+create or replace procedure "ETL_CREDIT_CARD"
+is
+begin
+
+--remove existing
+    DELETE FROM 
+        CC_CREDIT_CARD_PRE
+    WHERE "reference" IN (SELECT "reference" FROM CC_CREDIT_CARD);
+
+--Insert data from export to production
+    INSERT INTO
+		CC_CREDIT_CARD
+		("reference",
+		"date_time",
+		"value_date",
+		"debit",
+		"credit",
+		"trname",
+		"contragent",
+		"rem_i",
+		"rem_ii",
+		"rem_iii",
+		"YEAR_CC",
+		"MONTH_CC",
+		"DAY_CC",
+		"ID_WEEKDAY",
+        "PERIOD")
+	SELECT
+		"reference",
+		TO_DATE("datetime", 'dd/mm/yyyy'),
+		TO_DATE("valuedate", 'dd/mm/yyyy'),
+		TO_NUMBER("debit"),
+		TO_NUMBER("credit"),
+		"trname",
+		"contragent",
+		"rem_i",
+		"rem_ii",
+		"rem_iii",
+		EXTRACT(YEAR FROM TO_DATE("valuedate", 'dd/mm/yyyy')),
+		EXTRACT(MONTH FROM TO_DATE("valuedate", 'dd/mm/yyyy')),
+		EXTRACT(DAY FROM TO_DATE("valuedate", 'dd/mm/yyyy')),
+		TO_NUMBER(TO_CHAR(TO_DATE("valuedate", 'dd/mm/yyyy'), 'd')),	
+		CASE
+			WHEN EXTRACT(DAY FROM TO_DATE("datetime", 'dd/mm/yyyy')) > 19 THEN 	
+				(CASE 
+					WHEN EXTRACT(MONTH FROM TO_DATE("datetime", 'dd/mm/yyyy')) = 12 THEN 1
+					ELSE EXTRACT(MONTH FROM TO_DATE("datetime", 'dd/mm/yyyy')) + 1 END)
+			ELSE EXTRACT(MONTH FROM TO_DATE("datetime", 'dd/mm/yyyy'))
+		END		
+	FROM CC_CREDIT_CARD_PRE;
+
+    --Enrich data
+    
+    --Update Classification
+    FOR Lcntr IN 1..5 LOOP
+        UPDATE CC_CREDIT_CARD
+            SET ID_CLASSIFICATION = Lcntr
+        WHERE ID_CLASSIFICATION IS NULL
+        AND "contragent" 
+        IN (SELECT LEGAL_NAME FROM CC_CONTRAGENTS where ID_CLASSIFICATION = Lcntr);
+    END LOOP;
+    
+    --Update
+    
+    UPDATE CC_CREDIT_CARD
+        SET "contragent" = "trname"
+        WHERE "trname" = 'Лихви кредитни карти'
+        AND "contragent" IS NULL;
+
+    -- UPDATE FOREIGN KEYS 
+    UPDATE CC_CREDIT_CARD
+        SET 
+            ID_CONTRAGENT = (SELECT ID_CONTRAGENT FROM CC_CONTRAGENTS WHERE CC_CONTRAGENTS.LEGAL_NAME = "contragent"),
+            ID_TYPE = (SELECT ID_TYPE FROM CC_CLASSIFIER WHERE CC_CLASSIFIER.ID_CONTRAGENT = CC_CREDIT_CARD.ID_CONTRAGENT),
+            ID_CLASSIFICATION = (SELECT ID_CLASSIFICATION FROM CC_CLASSIFIER WHERE CC_CLASSIFIER.ID_CONTRAGENT = CC_CREDIT_CARD.ID_CONTRAGENT)
+        WHERE ID_TYPE IS NULL
+        AND   ID_CONTRAGENT IS NULL
+        AND   ID_CLASSIFICATION IS NULL;
+
+--delete imported
+    DELETE FROM 
+        CC_CREDIT_CARD_PRE
+    WHERE "reference" IN (SELECT "reference" FROM CC_CREDIT_CARD);
+
+end;
