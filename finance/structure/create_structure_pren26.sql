@@ -1,0 +1,28 @@
+CREATE TABLE  "PRE_N26" 
+   (	"ID" NUMBER, 
+	"DATECOL" DATE, 
+	"PAYEE" VARCHAR2(30), 
+	"ACCOUNT_NUMBER" VARCHAR2(30), 
+	"TRANSACTION_TYPE" VARCHAR2(30), 
+	"PAYMENT_REFERENCE" VARCHAR2(30), 
+	"CATEGORY" VARCHAR2(30), 
+	"AMOUNT_EUR" NUMBER, 
+	"AMOUNT_FOREIGN_CURRENCY" VARCHAR2(30), 
+	"TYPE_FOREIGN_CURRENCY" VARCHAR2(30), 
+	"EXCHANGE_RATE" NUMBER, 
+	 CONSTRAINT "N26_PRE_PK" PRIMARY KEY ("ID") ENABLE
+   )
+/
+
+CREATE OR REPLACE TRIGGER  "bi_N26_PRE" 
+  before insert on "PRE_N26"              
+  for each row 
+begin  
+  if :new."ID" is null then
+    select "N26_PRE_SEQ".nextval into :new."ID" from sys.dual;
+  end if;
+end;
+
+/
+ALTER TRIGGER  "bi_N26_PRE" ENABLE
+/
