@@ -27,7 +27,7 @@ prompt APPLICATION 105 - FM
 -- Application Export:
 --   Application:     105
 --   Name:            FM
---   Date and Time:   00:25 Saturday January 2, 2021
+--   Date and Time:   11:37 Tuesday March 2, 2021
 --   Exported By:     GEORGIEM
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -42,7 +42,7 @@ prompt APPLICATION 105 - FM
 --     Processes:               57
 --     Regions:                154
 --     Buttons:                120
---     Dynamic Actions:         45
+--     Dynamic Actions:         46
 --   Shared Components:
 --     Logic:
 --       Data Loading:           5
@@ -117,7 +117,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20210101154113'
+,p_last_upd_yyyymmddhh24miss=>'20210302101959'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -499,6 +499,22 @@ wwv_flow_api.create_list_item(
 ,p_list_item_link_text=>'RECURRING PAYMENTS GRAPHS'
 ,p_list_item_link_target=>'f?p=&APP_ID.:11:&SESSION.::&DEBUG.::::'
 ,p_list_item_icon=>'fa-combo-chart'
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(24303077323376904)
+,p_list_item_display_sequence=>50
+,p_list_item_link_text=>'N26'
+,p_list_item_link_target=>'f?p=&APP_ID.:33:&SESSION.::&DEBUG.::::'
+,p_list_item_icon=>'fa-university'
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(24303632704406106)
+,p_list_item_display_sequence=>60
+,p_list_item_link_text=>'REVOLUT'
+,p_list_item_link_target=>'f?p=&APP_ID.:28:&SESSION.::&DEBUG.::::'
+,p_list_item_icon=>'fa-university'
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list(
@@ -18398,7 +18414,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20210101153625'
+,p_last_upd_yyyymmddhh24miss=>'20210302101959'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(23349735359853483)
@@ -18698,6 +18714,25 @@ wwv_flow_api.create_page_da_action(
 ,p_attribute_01=>'ETL_DC_N26;'
 ,p_stop_execution_on_error=>'Y'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(24023720665144320)
+,p_name=>'Refresh'
+,p_event_sequence=>40
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_api.id(22841575620498422)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'click'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(24023850189144321)
+,p_event_id=>wwv_flow_api.id(24023720665144320)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_api.id(23349735359853483)
 );
 end;
 /
