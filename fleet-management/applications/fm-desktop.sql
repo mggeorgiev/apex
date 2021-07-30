@@ -27,7 +27,7 @@ prompt APPLICATION 106 - FLEET MANAGEMENT
 -- Application Export:
 --   Application:     106
 --   Name:            FLEET MANAGEMENT
---   Date and Time:   11:02 Saturday January 30, 2021
+--   Date and Time:   18:39 Friday July 30, 2021
 --   Exported By:     GEORGIEM
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -41,8 +41,8 @@ prompt APPLICATION 106 - FLEET MANAGEMENT
 --     Validations:              3
 --     Processes:               42
 --     Regions:                 55
---     Buttons:                 51
---     Dynamic Actions:         23
+--     Buttons:                 52
+--     Dynamic Actions:         26
 --   Shared Components:
 --     Logic:
 --     Navigation:
@@ -112,7 +112,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20210130110128'
+,p_last_upd_yyyymmddhh24miss=>'20210730182407'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -11363,7 +11363,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20191119145858'
+,p_last_upd_yyyymmddhh24miss=>'20210130122020'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(16385762067723535)
@@ -11433,7 +11433,7 @@ wwv_flow_api.create_worksheet(
 ,p_show_detail_link=>'C'
 ,p_show_notify=>'Y'
 ,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
-,p_detail_link=>'f?p=&APP_ID.:10:&SESSION.::&DEBUG.:RP,9:P10_CAR,P10_ID,P10_ДАТА,P10_ЗАБЕЛЕЖКА,P10_ИНТЕРВАЛ,P10_КИЛОМЕТРИ,P10_КЛАСИФИКАЦИЯ,P10_ЦЕНА:#DKN#,#ID_MAINTENANCE#,#DATE_COL#,#REFERENCE#,#INTERVAL_COL#,#MILEAGE#,#CLASSIFICATION#,#TOTAL#'
+,p_detail_link=>'f?p=&APP_ID.:15:&SESSION.::&DEBUG.:RP,9:P15_ID_MAINTENANCE:#ID_MAINTENANCE#'
 ,p_detail_link_text=>'<img src="#IMAGE_PREFIX#app_ui/img/icons/apex-edit-page.png" class="apex-edit-page" alt="">'
 ,p_detail_link_auth_scheme=>'MUST_NOT_BE_PUBLIC_USER'
 ,p_owner=>'GEORGIEM'
@@ -11686,8 +11686,20 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(24022601657144309)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_api.id(16609082202857384)
+,p_button_name=>'CompanyCar'
+,p_button_action=>'DEFINED_BY_DA'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(14802135912054037)
+,p_button_image_alt=>'AZ5473'
+,p_button_position=>'RIGHT_OF_IR_SEARCH_BAR'
+,p_warn_on_unsaved_changes=>null
+);
+wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(16385111131723529)
-,p_button_sequence=>10
+,p_button_sequence=>30
 ,p_button_plug_id=>wwv_flow_api.id(16609082202857384)
 ,p_button_name=>'Update'
 ,p_button_action=>'DEFINED_BY_DA'
@@ -11699,7 +11711,7 @@ wwv_flow_api.create_page_button(
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(16385487982723532)
-,p_button_sequence=>20
+,p_button_sequence=>40
 ,p_button_plug_id=>wwv_flow_api.id(16609082202857384)
 ,p_button_name=>'Approve'
 ,p_button_action=>'DEFINED_BY_DA'
@@ -11712,7 +11724,7 @@ wwv_flow_api.create_page_button(
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(16613949102857413)
-,p_button_sequence=>30
+,p_button_sequence=>50
 ,p_button_plug_id=>wwv_flow_api.id(16609082202857384)
 ,p_button_name=>'CREATE'
 ,p_button_action=>'REDIRECT_PAGE'
@@ -11805,6 +11817,53 @@ wwv_flow_api.create_page_da_action(
 ,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_api.id(16385762067723535)
 );
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(24022764711144310)
+,p_name=>'InsertData'
+,p_event_sequence=>30
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_api.id(24022601657144309)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'click'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(24022840404144311)
+,p_event_id=>wwv_flow_api.id(24022764711144310)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'INSERT INTO MAINTENANCE_PRP',
+'(CAR, ДАТА, КИЛОМЕТРИ, ЗАБЕЛЕЖКА, ЦЕНА, КЛАСИФИКАЦИЯ)',
+'SELECT ID_CAR, DATE_COL, KM, ''FUEL'', TOTAL*-1, 4',
+'FROM FUEL f ',
+'WHERE ID_CAR = (SELECT ID_CAR FROM CARS WHERE DKN = ''AZ5473'' )',
+'AND DATE_COL > (SELECT MAX(DATE_COL) FROM MAINTENANCE m ',
+'				WHERE ID_CAR = (SELECT ID_CAR FROM CARS WHERE DKN = ''AZ5473'' )',
+'				AND REFERENCE = ''FUEL'');'))
+,p_stop_execution_on_error=>'Y'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(24022961028144312)
+,p_name=>'Refresh'
+,p_event_sequence=>40
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_api.id(24022601657144309)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'click'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(24023045542144313)
+,p_event_id=>wwv_flow_api.id(24022961028144312)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_api.id(16609082202857384)
+);
 end;
 /
 prompt --application/pages/page_00010
@@ -11827,7 +11886,7 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'C'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20190327135901'
+,p_last_upd_yyyymmddhh24miss=>'20210730182407'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(16596148403857249)
@@ -11845,7 +11904,7 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(16596661776857254)
-,p_button_sequence=>50
+,p_button_sequence=>30
 ,p_button_plug_id=>wwv_flow_api.id(16596148403857249)
 ,p_button_name=>'SAVE'
 ,p_button_action=>'SUBMIT'
@@ -11857,6 +11916,18 @@ wwv_flow_api.create_page_button(
 ,p_button_condition=>'P10_ID'
 ,p_button_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_database_action=>'UPDATE'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(24823735643052206)
+,p_button_sequence=>40
+,p_button_plug_id=>wwv_flow_api.id(16596148403857249)
+,p_button_name=>'Approve'
+,p_button_action=>'DEFINED_BY_DA'
+,p_button_template_options=>'#DEFAULT#:t-Button--warning'
+,p_button_template_id=>wwv_flow_api.id(14802135912054037)
+,p_button_image_alt=>'Approve'
+,p_button_position=>'REGION_TEMPLATE_CHANGE'
+,p_warn_on_unsaved_changes=>null
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(16596898115857254)
@@ -11871,23 +11942,8 @@ wwv_flow_api.create_page_button(
 ,p_button_redirect_url=>'f?p=&APP_ID.:9:&SESSION.::&DEBUG.:::'
 );
 wwv_flow_api.create_page_button(
- p_id=>wwv_flow_api.id(16818050582539823)
-,p_button_sequence=>30
-,p_button_plug_id=>wwv_flow_api.id(16596148403857249)
-,p_button_name=>'Reject'
-,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#'
-,p_button_template_id=>wwv_flow_api.id(14802135912054037)
-,p_button_image_alt=>'Reject'
-,p_button_position=>'REGION_TEMPLATE_CLOSE'
-,p_button_condition=>'P10_ID'
-,p_button_condition_type=>'ITEM_IS_NOT_NULL'
-,p_security_scheme=>'MUST_NOT_BE_PUBLIC_USER'
-,p_database_action=>'DELETE'
-);
-wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(16596561082857254)
-,p_button_sequence=>60
+,p_button_sequence=>50
 ,p_button_plug_id=>wwv_flow_api.id(16596148403857249)
 ,p_button_name=>'CREATE'
 ,p_button_action=>'SUBMIT'
@@ -11902,11 +11958,11 @@ wwv_flow_api.create_page_button(
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(16596798316857254)
-,p_button_sequence=>40
+,p_button_sequence=>10
 ,p_button_plug_id=>wwv_flow_api.id(16596148403857249)
 ,p_button_name=>'DELETE'
 ,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#'
+,p_button_template_options=>'#DEFAULT#:t-Button--danger'
 ,p_button_template_id=>wwv_flow_api.id(14802135912054037)
 ,p_button_image_alt=>'Reject'
 ,p_button_position=>'REGION_TEMPLATE_DELETE'
@@ -12127,6 +12183,39 @@ wwv_flow_api.create_page_da_action(
 ,p_attribute_09=>'N'
 ,p_stop_execution_on_error=>'Y'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(24823881893052207)
+,p_name=>'Approve'
+,p_event_sequence=>30
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_api.id(24823735643052206)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'click'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(24823955721052208)
+,p_event_id=>wwv_flow_api.id(24823881893052207)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'BEGIN',
+'    APPROVE_MAINTENANCE(:P10_ID);',
+'END;'))
+,p_attribute_02=>'P10_ID'
+,p_stop_execution_on_error=>'Y'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(24824050030052209)
+,p_event_id=>wwv_flow_api.id(24823881893052207)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_SUBMIT_PAGE'
+,p_attribute_02=>'Y'
 );
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(16606512855857348)
