@@ -27,7 +27,7 @@ prompt APPLICATION 106 - FLEET MANAGEMENT
 -- Application Export:
 --   Application:     106
 --   Name:            FLEET MANAGEMENT
---   Date and Time:   18:39 Friday July 30, 2021
+--   Date and Time:   22:33 Tuesday May 31, 2022
 --   Exported By:     GEORGIEM
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -40,7 +40,7 @@ prompt APPLICATION 106 - FLEET MANAGEMENT
 --     Items:                   79
 --     Validations:              3
 --     Processes:               42
---     Regions:                 55
+--     Regions:                 57
 --     Buttons:                 52
 --     Dynamic Actions:         26
 --   Shared Components:
@@ -112,7 +112,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20210730182407'
+,p_last_upd_yyyymmddhh24miss=>'20220531223009'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -9940,7 +9940,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20200929175614'
+,p_last_upd_yyyymmddhh24miss=>'20220531223009'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(14869105436977594)
@@ -9952,32 +9952,25 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'SELECT ',
-'		FUEL.ID_FUEL,',
-'		CARS.MAKE || '' '' || CARS.MODEL AS "CAR", ',
-'		TO_CHAR(FUEL.DATE_COL, ''YYYY/MM/DD'') as "DATE", ',
-'		KM,',
-'		AMOUNT,',
-'		CASE WHEN FUEL.CURRENCY=2 THEN ROUND(PRICE/1.95583,2) ELSE PRICE END AS "PRICE",',
-'		CASE WHEN FUEL.CURRENCY=2 THEN ROUND(TOTAL/1.95583,2) ELSE TOTAL END AS "TOTAL",',
-'        CURRENCY.CURRENCY AS "CURRENCY",',
-'		FUEL_NAME AS "FUEL BRAND",',
-'		DRIVE_TYPE AS "DRIVE TYPE",',
-'		MILEAGE,',
-'		LKM,',
-'		PERIOD,',
-'		CALENDAR.YEAR_COL AS "YEAR",',
-'		CALENDAR.QUARTER AS "QUARTER",',
-'		CALENDAR.MONTH_COL AS "MONTH",',
-'		CALENDAR.DAY AS "DAY",',
-'		WEEKDAYS.WEEKDAY_BG AS "WEEKDAY"',
-'    FROM FUEL',
-'    JOIN CARS ON FUEL.ID_CAR=CARS.ID_CAR',
-'    LEFT JOIN SUPPLIER_FUELS ON FUEL.ID_BRAND = SUPPLIER_FUELS.ID_BRAND',
-'    JOIN DRIVE_TYPE ON FUEL.ID_DRIVE_TYPE = DRIVE_TYPE.ID_DRIVE_TYPE',
-'    JOIN CALENDAR ON CALENDAR.DATE_COL = FUEL.DATE_COL',
-'    LEFT JOIN WEEKDAYS ON WEEKDAYS.ID_WEEKDAY = CALENDAR.WEEKDAY',
-'    LEFT JOIN CURRENCY ON CURRENCY.ID = FUEL.CURRENCY',
-'    ORDER BY FUEL.DATE_COL DESC;'))
+'    ID_FUEL',
+'    ,CAR',
+'    ,"DATE"',
+'    ,KM',
+'    ,AMOUNT',
+'    ,PRICE',
+'    ,TOTAL',
+'    ,"FUEL BRAND"',
+'    ,"DRIVE TYPE"',
+'    ,MILEAGE',
+'    ,LKM',
+'    ,PERIOD',
+'    ,"YEAR"',
+'    ,"QUARTER"',
+'    ,"MONTH"',
+'    ,"DAY"',
+'    ,"WEEKDAY"',
+'FROM CARS.V_FUEL_REFUEL;',
+''))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -10136,17 +10129,6 @@ wwv_flow_api.create_worksheet_column(
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(14874834456977617)
-,p_db_column_name=>'QUARTER'
-,p_display_order=>14
-,p_column_identifier=>'N'
-,p_column_label=>'Quarter'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(14875224095977617)
 ,p_db_column_name=>'MONTH'
 ,p_display_order=>15
@@ -10179,11 +10161,11 @@ wwv_flow_api.create_worksheet_column(
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(21836452233446704)
-,p_db_column_name=>'CURRENCY'
-,p_display_order=>27
-,p_column_identifier=>'R'
-,p_column_label=>'Currency'
+ p_id=>wwv_flow_api.id(25638538107874401)
+,p_db_column_name=>'QUARTER'
+,p_display_order=>37
+,p_column_identifier=>'S'
+,p_column_label=>'Quarter'
 ,p_column_type=>'STRING'
 );
 wwv_flow_api.create_worksheet_rpt(
@@ -10194,7 +10176,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'ID_FUEL:CAR:DATE:KM:AMOUNT:PRICE:TOTAL:FUEL BRAND:DRIVE TYPE:MILEAGE:LKM:PERIOD:YEAR:QUARTER:MONTH:DAY:WEEKDAY:CURRENCY'
+,p_report_columns=>'ID_FUEL:CAR:DATE:KM:AMOUNT:PRICE:TOTAL:FUEL BRAND:DRIVE TYPE:MILEAGE:LKM:PERIOD:YEAR:MONTH:DAY:WEEKDAY'
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_button(
@@ -15499,7 +15481,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20190819133522'
+,p_last_upd_yyyymmddhh24miss=>'20220510214800'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(19942443580192210)
@@ -15594,6 +15576,241 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_is_default=>'Y'
 ,p_display_rows=>50
 ,p_report_columns=>'YEAR:MILEAGE:AVG_MILEAGE:STDDEV_MLG'
+,p_flashback_enabled=>'N'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(25616488907664901)
+,p_plug_name=>'STATISTICS MILEAGE BY CARS'
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(14778823371053866)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT "Year", "Month", "Plate", "Mileage", "AVG_Mileage", "STDDEV_Mileage"',
+'FROM V_MILEAGE_STATS_BY_CARS;',
+''))
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_document_header=>'APEX'
+,p_prn_units=>'INCHES'
+,p_prn_paper_size=>'LETTER'
+,p_prn_width=>11
+,p_prn_height=>8.5
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#9bafde'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'normal'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#efefef'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(25616549753664902)
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'N'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>25616549753664902
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25617090067664907)
+,p_db_column_name=>'Year'
+,p_display_order=>10
+,p_column_identifier=>'A'
+,p_column_label=>'Year'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25617153567664908)
+,p_db_column_name=>'Month'
+,p_display_order=>20
+,p_column_identifier=>'B'
+,p_column_label=>'Month'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25617285341664909)
+,p_db_column_name=>'Plate'
+,p_display_order=>30
+,p_column_identifier=>'C'
+,p_column_label=>'Plate'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25617308893664910)
+,p_db_column_name=>'Mileage'
+,p_display_order=>40
+,p_column_identifier=>'D'
+,p_column_label=>'Mileage'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25618027440664917)
+,p_db_column_name=>'AVG_Mileage'
+,p_display_order=>50
+,p_column_identifier=>'E'
+,p_column_label=>'Avg mileage'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25618154805664918)
+,p_db_column_name=>'STDDEV_Mileage'
+,p_display_order=>60
+,p_column_identifier=>'F'
+,p_column_label=>'Stddev mileage'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(25623216768678508)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'256233'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'Year:Month:Plate:Mileage:AVG_Mileage:STDDEV_Mileage'
+,p_sort_column_1=>'Year'
+,p_sort_direction_1=>'DESC'
+,p_sort_column_2=>'Month'
+,p_sort_direction_2=>'DESC'
+,p_flashback_enabled=>'N'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(25617497492664911)
+,p_plug_name=>'MILEAGE BY CARS'
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(14778823371053866)
+,p_plug_display_sequence=>30
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT "Year", "Month", "Plate", "Mileage"',
+'FROM V_MILEAGE_BY_CARS',
+'ORDER BY "Year", "Month", "Mileage", "Plate";',
+''))
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_document_header=>'APEX'
+,p_prn_units=>'INCHES'
+,p_prn_paper_size=>'LETTER'
+,p_prn_width=>11
+,p_prn_height=>8.5
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#9bafde'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'normal'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#efefef'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(25617586249664912)
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'N'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>25617586249664912
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25617699663664913)
+,p_db_column_name=>'Year'
+,p_display_order=>10
+,p_column_identifier=>'A'
+,p_column_label=>'Year'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25617731703664914)
+,p_db_column_name=>'Month'
+,p_display_order=>20
+,p_column_identifier=>'B'
+,p_column_label=>'Month'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25617833755664915)
+,p_db_column_name=>'Plate'
+,p_display_order=>30
+,p_column_identifier=>'C'
+,p_column_label=>'Plate'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25617963599664916)
+,p_db_column_name=>'Mileage'
+,p_display_order=>40
+,p_column_identifier=>'D'
+,p_column_label=>'Mileage'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(25629171956912236)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'256292'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'Year:Month:Plate:Mileage'
+,p_sort_column_1=>'Month'
+,p_sort_direction_1=>'DESC'
+,p_sort_column_2=>'Year'
+,p_sort_direction_2=>'DESC'
 ,p_flashback_enabled=>'N'
 );
 end;
