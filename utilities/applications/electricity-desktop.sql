@@ -27,7 +27,7 @@ prompt APPLICATION 109 - ELECTRICITY
 -- Application Export:
 --   Application:     109
 --   Name:            ELECTRICITY
---   Date and Time:   10:00 Saturday September 10, 2022
+--   Date and Time:   10:08 Saturday September 10, 2022
 --   Exported By:     GEORGIEM
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -112,7 +112,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20220910100026'
+,p_last_upd_yyyymmddhh24miss=>'20220910100825'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -137,7 +137,7 @@ wwv_flow_api.create_list_item(
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(22872280957559554)
 ,p_list_item_display_sequence=>20
-,p_list_item_link_text=>'Log'
+,p_list_item_link_text=>'LOG'
 ,p_list_item_link_target=>'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::::'
 ,p_list_item_icon=>'fa-archive'
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
@@ -155,7 +155,7 @@ wwv_flow_api.create_list_item(
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(22871948969556516)
 ,p_list_item_display_sequence=>30
-,p_list_item_link_text=>'Management'
+,p_list_item_link_text=>'MANAGEMENT'
 ,p_list_item_link_target=>'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::::'
 ,p_list_item_icon=>'fa-check-square-o'
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
