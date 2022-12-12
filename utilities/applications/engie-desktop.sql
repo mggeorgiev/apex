@@ -27,7 +27,7 @@ prompt APPLICATION 110 - ENGIE
 -- Application Export:
 --   Application:     110
 --   Name:            ENGIE
---   Date and Time:   01:27 Thursday September 10, 2020
+--   Date and Time:   11:51 Monday December 12, 2022
 --   Exported By:     GEORGIEM
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -36,19 +36,19 @@ prompt APPLICATION 110 - ENGIE
 --
 
 -- Application Statistics:
---   Pages:                      4
---     Items:                   11
+--   Pages:                     17
+--     Items:                   29
 --     Validations:              1
---     Processes:                7
---     Regions:                  6
---     Buttons:                  6
---     Dynamic Actions:          1
+--     Processes:               20
+--     Regions:                 37
+--     Buttons:                 26
+--     Dynamic Actions:          4
 --   Shared Components:
 --     Logic:
 --     Navigation:
 --       Lists:                  2
 --       Breadcrumbs:            1
---         Entries:              3
+--         Entries:             15
 --     Security:
 --       Authentication:         1
 --     User Interface:
@@ -63,7 +63,7 @@ prompt APPLICATION 110 - ENGIE
 --         Breadcrumb:           1
 --         Button:               3
 --         Report:               9
---       LOVs:                   2
+--       LOVs:                   5
 --       Shortcuts:              1
 --     Globalization:
 --     Reports:
@@ -113,7 +113,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20200910005648'
+,p_last_upd_yyyymmddhh24miss=>'20221212114829'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -130,9 +130,10 @@ wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(23206583275843005)
 ,p_list_item_display_sequence=>10
 ,p_list_item_link_text=>'Home'
-,p_list_item_link_target=>'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:'
+,p_list_item_link_target=>'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::::'
+,p_list_item_icon=>'fa-home'
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
-,p_list_item_current_for_pages=>'1,2,3'
+,p_list_item_current_for_pages=>'1,2,3,5,6,8,7,13,2,11,10,15,16'
 );
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(23223793262904422)
@@ -142,6 +143,95 @@ wwv_flow_api.create_list_item(
 ,p_parent_list_item_id=>wwv_flow_api.id(23206583275843005)
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'3,4'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(23383542843119310)
+,p_list_item_display_sequence=>30
+,p_list_item_link_text=>'COST'
+,p_list_item_link_target=>'f?p=&APP_ID.:11:&SESSION.::&DEBUG.::::'
+,p_parent_list_item_id=>wwv_flow_api.id(23206583275843005)
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'11'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(23255990193542368)
+,p_list_item_display_sequence=>40
+,p_list_item_link_text=>'CONSUMPTION'
+,p_list_item_link_target=>'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::::'
+,p_parent_list_item_id=>wwv_flow_api.id(23206583275843005)
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'5'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(25892110524106045)
+,p_list_item_display_sequence=>50
+,p_list_item_link_text=>'CHARTS'
+,p_parent_list_item_id=>wwv_flow_api.id(23206583275843005)
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(23263665722575823)
+,p_list_item_display_sequence=>110
+,p_list_item_link_text=>'CONSUMPTION CHART'
+,p_list_item_link_target=>'f?p=&APP_ID.:6:&SESSION.::&DEBUG.::::'
+,p_parent_list_item_id=>wwv_flow_api.id(25892110524106045)
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'6'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(25752511400052658)
+,p_list_item_display_sequence=>120
+,p_list_item_link_text=>'CONSUMPTION PER MONTH'
+,p_list_item_link_target=>'f?p=&APP_ID.:16:&SESSION.::&DEBUG.::::'
+,p_parent_list_item_id=>wwv_flow_api.id(25892110524106045)
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'16'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(23376547254932601)
+,p_list_item_display_sequence=>60
+,p_list_item_link_text=>'PAYMENTS'
+,p_list_item_link_target=>'f?p=&APP_ID.:2:&SESSION.::&DEBUG.::::'
+,p_parent_list_item_id=>wwv_flow_api.id(23206583275843005)
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'2,9'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(23290224028744115)
+,p_list_item_display_sequence=>70
+,p_list_item_link_text=>'PRICES'
+,p_list_item_link_target=>'f?p=&APP_ID.:7:&SESSION.::&DEBUG.::::'
+,p_list_item_icon=>'fa-eur'
+,p_parent_list_item_id=>wwv_flow_api.id(23206583275843005)
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'7,8'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(23301334470998084)
+,p_list_item_display_sequence=>80
+,p_list_item_link_text=>'PRICE_TYPES'
+,p_list_item_link_target=>'f?p=&APP_ID.:13:&SESSION.::&DEBUG.'
+,p_parent_list_item_id=>wwv_flow_api.id(23206583275843005)
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'13,14'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(23557549576801536)
+,p_list_item_display_sequence=>90
+,p_list_item_link_text=>'APARTMENTS'
+,p_list_item_link_target=>'f?p=&APP_ID.:10:&SESSION.::&DEBUG.'
+,p_parent_list_item_id=>wwv_flow_api.id(23206583275843005)
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'10,12'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(24657423826367978)
+,p_list_item_display_sequence=>100
+,p_list_item_link_text=>'REPORTS'
+,p_list_item_link_target=>'f?p=&APP_ID.:15:&SESSION.::&DEBUG.'
+,p_parent_list_item_id=>wwv_flow_api.id(23206583275843005)
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'15'
 );
 wwv_flow_api.create_list(
  p_id=>wwv_flow_api.id(23205015036842979)
@@ -240,6 +330,24 @@ end;
 prompt --application/shared_components/user_interface/lovs
 begin
 wwv_flow_api.create_list_of_values(
+ p_id=>wwv_flow_api.id(23580663849091545)
+,p_lov_name=>'APARTMENTS'
+,p_lov_query=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select a.AP_NUM as d,',
+'       a.AP_ID as r',
+'  from APARTMENTS a',
+' order by 1'))
+);
+wwv_flow_api.create_list_of_values(
+ p_id=>wwv_flow_api.id(23566944913876312)
+,p_lov_name=>'CITIES'
+,p_lov_query=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select CITY as d,',
+'       CITY_ID as r',
+'  from CITY',
+' order by 1'))
+);
+wwv_flow_api.create_list_of_values(
  p_id=>wwv_flow_api.id(23241501534628463)
 ,p_lov_name=>'ENGIECLIENTNUMBERS'
 ,p_lov_query=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -247,6 +355,15 @@ wwv_flow_api.create_list_of_values(
 '    distinct CLIENT_NUMBER as d',
 '    ,rownum as r',
 '  from ENGIE',
+' order by 1'))
+);
+wwv_flow_api.create_list_of_values(
+ p_id=>wwv_flow_api.id(23306236955023048)
+,p_lov_name=>'ENGIE_PRICES'
+,p_lov_query=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select PRICE as d,',
+'       ID as r',
+'  from ENGIE_PRICE',
 ' order by 1'))
 );
 wwv_flow_api.create_list_of_values(
@@ -301,6 +418,89 @@ wwv_flow_api.create_menu_option(
 ,p_short_name=>'INDEX'
 ,p_link=>'f?p=&APP_ID.:4:&SESSION.'
 ,p_page_id=>4
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(23257181908542370)
+,p_parent_id=>wwv_flow_api.id(23206895024843007)
+,p_short_name=>'CONSUMPTION'
+,p_link=>'f?p=&APP_ID.:5:&SESSION.'
+,p_page_id=>5
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(23264804879575825)
+,p_parent_id=>wwv_flow_api.id(23257181908542370)
+,p_short_name=>'CONSUMPTION'
+,p_link=>'f?p=&APP_ID.:6:&SESSION.'
+,p_page_id=>6
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(23293772672744123)
+,p_parent_id=>wwv_flow_api.id(23206895024843007)
+,p_short_name=>'PRICES'
+,p_link=>'f?p=&APP_ID.:7:&SESSION.'
+,p_page_id=>7
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(23294900063744126)
+,p_parent_id=>wwv_flow_api.id(23293772672744123)
+,p_short_name=>'PRICE'
+,p_link=>'f?p=&APP_ID.:8:&SESSION.'
+,p_page_id=>8
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(23304089217998091)
+,p_short_name=>'PRICE_TYPES'
+,p_link=>'f?p=&APP_ID.:13:&SESSION.'
+,p_page_id=>13
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(23305215406998094)
+,p_parent_id=>wwv_flow_api.id(23304089217998091)
+,p_short_name=>'PRICE_TYPE'
+,p_link=>'f?p=&APP_ID.:14:&SESSION.'
+,p_page_id=>14
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(23380038451932632)
+,p_parent_id=>wwv_flow_api.id(23206895024843007)
+,p_short_name=>'PAYMENTS'
+,p_link=>'f?p=&APP_ID.:2:&SESSION.'
+,p_page_id=>2
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(23381232047932637)
+,p_parent_id=>wwv_flow_api.id(23380038451932632)
+,p_short_name=>'PAYMENT'
+,p_link=>'f?p=&APP_ID.:9:&SESSION.'
+,p_page_id=>9
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(23384795768119312)
+,p_parent_id=>wwv_flow_api.id(23206895024843007)
+,p_short_name=>'COST'
+,p_link=>'f?p=&APP_ID.:11:&SESSION.'
+,p_page_id=>11
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(23563895603801752)
+,p_parent_id=>wwv_flow_api.id(23206895024843007)
+,p_short_name=>'APARTMENTS'
+,p_link=>'f?p=&APP_ID.:10:&SESSION.'
+,p_page_id=>10
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(24658550592368000)
+,p_parent_id=>wwv_flow_api.id(23206895024843007)
+,p_short_name=>'REPORTS'
+,p_link=>'f?p=&APP_ID.:15:&SESSION.'
+,p_page_id=>15
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(25753668043052686)
+,p_parent_id=>wwv_flow_api.id(23206895024843007)
+,p_short_name=>'Consumption Per Month'
+,p_link=>'f?p=&APP_ID.:16:&SESSION.'
+,p_page_id=>16
 );
 end;
 /
@@ -8818,7 +9018,126 @@ wwv_flow_api.create_page(
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
-,p_last_upd_yyyymmddhh24miss=>'20200909221152'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20210204101243'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(22843640263498443)
+,p_plug_name=>'Dashboard'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_escape_on_http_output=>'Y'
+,p_plug_template=>wwv_flow_api.id(23171518336842928)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_source_type=>'NATIVE_JET_CHART'
+,p_plug_query_num_rows=>15
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_jet_chart(
+ p_id=>wwv_flow_api.id(22843819236498445)
+,p_region_id=>wwv_flow_api.id(22843640263498443)
+,p_chart_type=>'bar'
+,p_title=>'Payment vs Cost'
+,p_animation_on_display=>'none'
+,p_animation_on_data_change=>'none'
+,p_orientation=>'vertical'
+,p_data_cursor=>'auto'
+,p_data_cursor_behavior=>'auto'
+,p_hide_and_show_behavior=>'none'
+,p_hover_behavior=>'none'
+,p_stack=>'off'
+,p_zoom_and_scroll=>'off'
+,p_tooltip_rendered=>'Y'
+,p_show_series_name=>true
+,p_show_group_name=>true
+,p_show_value=>true
+,p_show_label=>true
+,p_legend_rendered=>'on'
+,p_legend_position=>'auto'
+);
+wwv_flow_api.create_jet_chart_series(
+ p_id=>wwv_flow_api.id(22843944752498446)
+,p_chart_id=>wwv_flow_api.id(22843819236498445)
+,p_seq=>10
+,p_name=>'Payments'
+,p_data_source_type=>'SQL_QUERY'
+,p_data_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT',
+'	ec.y AS y',
+'	,ec.m AS m',
+'	,SUM(AMOUNT) AS AMOUNT',
+'	FROM (',
+'			SELECT ',
+'				AMOUNT',
+'				,EXTRACT(YEAR FROM DATECOL) AS y',
+'				,EXTRACT(MONTH FROM DATECOL) AS m',
+'				FROM ENGIE_PAYMENTS	',
+'		) ec',
+'	GROUP BY ec.y, ec.m',
+'	ORDER BY ec.y DESC, ec.m'))
+,p_items_value_column_name=>'AMOUNT'
+,p_group_name_column_name=>'Y'
+,p_items_label_column_name=>'M'
+,p_color=>'#4CD964'
+,p_assigned_to_y2=>'off'
+,p_items_label_rendered=>false
+);
+wwv_flow_api.create_jet_chart_series(
+ p_id=>wwv_flow_api.id(22844212393498449)
+,p_chart_id=>wwv_flow_api.id(22843819236498445)
+,p_seq=>20
+,p_name=>'Cost'
+,p_data_source_type=>'SQL_QUERY'
+,p_data_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT',
+'	ec.y AS y',
+'	,ec.m AS m',
+'	,SUM(TOTAL_COST) AS TOTAL_COST',
+'	FROM (',
+'			SELECT ',
+'				TOTAL_COST',
+'				,EXTRACT(YEAR FROM TSTAMP) AS y',
+'				,EXTRACT(MONTH FROM TSTAMP) AS m',
+'				FROM V_ENGIE_COST vec',
+'		) ec',
+'	GROUP BY ec.y, ec.m',
+'	ORDER BY ec.y DESC, ec.m'))
+,p_items_value_column_name=>'TOTAL_COST'
+,p_group_name_column_name=>'Y'
+,p_items_label_column_name=>'M'
+,p_color=>'#FF3B30'
+,p_assigned_to_y2=>'off'
+,p_items_label_rendered=>false
+);
+wwv_flow_api.create_jet_chart_axis(
+ p_id=>wwv_flow_api.id(22844050959498447)
+,p_chart_id=>wwv_flow_api.id(22843819236498445)
+,p_axis=>'x'
+,p_is_rendered=>'on'
+,p_title=>'Months'
+,p_format_scaling=>'auto'
+,p_scaling=>'linear'
+,p_baseline_scaling=>'zero'
+,p_major_tick_rendered=>'on'
+,p_minor_tick_rendered=>'off'
+,p_tick_label_rendered=>'on'
+,p_tick_label_rotation=>'auto'
+,p_tick_label_position=>'outside'
+);
+wwv_flow_api.create_jet_chart_axis(
+ p_id=>wwv_flow_api.id(22844132124498448)
+,p_chart_id=>wwv_flow_api.id(22843819236498445)
+,p_axis=>'y'
+,p_is_rendered=>'on'
+,p_title=>'Euro'
+,p_format_scaling=>'auto'
+,p_scaling=>'linear'
+,p_baseline_scaling=>'zero'
+,p_position=>'auto'
+,p_major_tick_rendered=>'on'
+,p_minor_tick_rendered=>'off'
+,p_tick_label_rendered=>'on'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(23206993012843008)
@@ -8833,6 +9152,171 @@ wwv_flow_api.create_page_plug(
 ,p_plug_source_type=>'NATIVE_BREADCRUMB'
 ,p_menu_template_id=>wwv_flow_api.id(23194890188842952)
 ,p_plug_query_row_template=>1
+);
+end;
+/
+prompt --application/pages/page_00002
+begin
+wwv_flow_api.create_page(
+ p_id=>2
+,p_user_interface_id=>wwv_flow_api.id(23205127151842980)
+,p_name=>'PAYMENTS'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'PAYMENTS'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20201227141120'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23377599735932619)
+,p_plug_name=>'Report 1'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23171038658842927)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select ',
+'    "ROWID", ',
+'    "ID",',
+'    "DATECOL",',
+'    "AMOUNT",',
+'    "AP_ID"',
+'from "#OWNER#"."ENGIE_PAYMENTS" ',
+'order by DATECOL DESC',
+'  ',
+''))
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(23377902775932620)
+,p_name=>'Report 1'
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'C'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_detail_link=>'f?p=&APP_ID.:9:&APP_SESSION.::::P9_ROWID:#ROWID#'
+,p_detail_link_text=>'<img src="#IMAGE_PREFIX#app_ui/img/icons/apex-edit-pencil.png" class="apex-edit-pencil" alt="Edit">'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>23377902775932620
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23378005408932625)
+,p_db_column_name=>'ROWID'
+,p_display_order=>1
+,p_column_identifier=>'A'
+,p_column_label=>'ROWID'
+,p_allow_sorting=>'N'
+,p_allow_filtering=>'N'
+,p_allow_highlighting=>'N'
+,p_allow_ctrl_breaks=>'N'
+,p_allow_aggregations=>'N'
+,p_allow_computations=>'N'
+,p_allow_charting=>'N'
+,p_allow_group_by=>'N'
+,p_allow_pivot=>'N'
+,p_column_type=>'OTHER'
+,p_display_text_as=>'HIDDEN'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+,p_rpt_show_filter_lov=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23378429830932629)
+,p_db_column_name=>'ID'
+,p_display_order=>2
+,p_column_identifier=>'B'
+,p_column_label=>'Id'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23378823958932630)
+,p_db_column_name=>'DATECOL'
+,p_display_order=>3
+,p_column_identifier=>'C'
+,p_column_label=>'Date'
+,p_column_type=>'DATE'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23379255668932631)
+,p_db_column_name=>'AMOUNT'
+,p_display_order=>4
+,p_column_identifier=>'D'
+,p_column_label=>'Amount'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(22843457090498441)
+,p_db_column_name=>'AP_ID'
+,p_display_order=>14
+,p_column_identifier=>'E'
+,p_column_label=>'Apartment'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'LOV_ESCAPE_SC'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_rpt_named_lov=>wwv_flow_api.id(23580663849091545)
+,p_rpt_show_filter_lov=>'1'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(23381881321942845)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'233819'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'ID:DATECOL:AMOUNT:AP_ID:'
+,p_sum_columns_on_break=>'AMOUNT'
+,p_flashback_enabled=>'N'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23380208341932634)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23175992985842930)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(23206486341843004)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(23194890188842952)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23379608917932631)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_api.id(23377599735932619)
+,p_button_name=>'CREATE'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Create'
+,p_button_position=>'RIGHT_OF_IR_SEARCH_BAR'
+,p_button_redirect_url=>'f?p=&APP_ID.:9:&SESSION.::&DEBUG.:9'
+,p_grid_new_grid=>false
 );
 end;
 /
@@ -8853,7 +9337,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20200910004750'
+,p_last_upd_yyyymmddhh24miss=>'20201227135129'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(23224707143904430)
@@ -8869,14 +9353,16 @@ wwv_flow_api.create_page_plug(
 '    "ID",',
 '    "TSTAMP",',
 '    "CLIENT_NUMBER",',
-'    "PEAK_CONSUMPTION",',
-'    "OFF_PEAK_CONSUMPTION",',
+'    "PEAK_INDEX",',
+'    "OFF_PEAK_INDEX",',
 '    "YEAR",',
 '    "MONTH",',
 '    "DAY",',
 '    "WEEKDAY"',
 'from "#OWNER#"."ENGIE" ',
-'ORDER BY "TSTAMP" DESC',
+'ORDER BY "YEAR" DESC',
+'         ,"MONTH" DESC',
+'         ,"DAY"',
 '  ',
 ''))
 ,p_plug_source_type=>'NATIVE_IR'
@@ -8936,7 +9422,7 @@ wwv_flow_api.create_worksheet_column(
 ,p_db_column_name=>'TSTAMP'
 ,p_display_order=>3
 ,p_column_identifier=>'C'
-,p_column_label=>'Tstamp'
+,p_column_label=>'Date'
 ,p_column_type=>'DATE'
 ,p_heading_alignment=>'LEFT'
 ,p_format_mask=>'YYYY-MM-DD'
@@ -8955,59 +9441,54 @@ wwv_flow_api.create_worksheet_column(
 ,p_rpt_show_filter_lov=>'1'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(23226889011904435)
-,p_db_column_name=>'PEAK_CONSUMPTION'
-,p_display_order=>5
-,p_column_identifier=>'E'
-,p_column_label=>'Peak Consumption'
+ p_id=>wwv_flow_api.id(21837138914446711)
+,p_db_column_name=>'PEAK_INDEX'
+,p_display_order=>14
+,p_column_identifier=>'K'
+,p_column_label=>'Peak index'
 ,p_column_type=>'NUMBER'
-,p_heading_alignment=>'LEFT'
-,p_tz_dependent=>'N'
+,p_column_alignment=>'RIGHT'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(23227206567904436)
-,p_db_column_name=>'OFF_PEAK_CONSUMPTION'
-,p_display_order=>6
-,p_column_identifier=>'F'
-,p_column_label=>'Off Peak Consumption'
+ p_id=>wwv_flow_api.id(21837222887446712)
+,p_db_column_name=>'OFF_PEAK_INDEX'
+,p_display_order=>24
+,p_column_identifier=>'L'
+,p_column_label=>'Off peak index'
 ,p_column_type=>'NUMBER'
-,p_heading_alignment=>'LEFT'
-,p_tz_dependent=>'N'
+,p_column_alignment=>'RIGHT'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(23227678762904436)
 ,p_db_column_name=>'YEAR'
-,p_display_order=>7
+,p_display_order=>34
 ,p_column_identifier=>'G'
 ,p_column_label=>'Year'
 ,p_column_type=>'NUMBER'
 ,p_heading_alignment=>'LEFT'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(23228010549904436)
 ,p_db_column_name=>'MONTH'
-,p_display_order=>8
+,p_display_order=>44
 ,p_column_identifier=>'H'
 ,p_column_label=>'Month'
 ,p_column_type=>'NUMBER'
 ,p_heading_alignment=>'LEFT'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(23228434228904437)
 ,p_db_column_name=>'DAY'
-,p_display_order=>9
+,p_display_order=>54
 ,p_column_identifier=>'I'
 ,p_column_label=>'Day'
 ,p_column_type=>'NUMBER'
 ,p_heading_alignment=>'LEFT'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(23228801334904438)
 ,p_db_column_name=>'WEEKDAY'
-,p_display_order=>10
+,p_display_order=>64
 ,p_column_identifier=>'J'
 ,p_column_label=>'Weekday'
 ,p_column_type=>'NUMBER'
@@ -9024,7 +9505,19 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'ROWID:ID:TSTAMP:CLIENT_NUMBER:PEAK_CONSUMPTION:OFF_PEAK_CONSUMPTION:YEAR:MONTH:DAY:WEEKDAY'
+,p_report_columns=>'ROWID:ID:TSTAMP:CLIENT_NUMBER:YEAR:MONTH:DAY:WEEKDAY:PEAK_INDEX:OFF_PEAK_INDEX'
+,p_sort_column_1=>'TSTAMP'
+,p_sort_direction_1=>'DESC'
+,p_sort_column_2=>'0'
+,p_sort_direction_2=>'ASC'
+,p_sort_column_3=>'0'
+,p_sort_direction_3=>'ASC'
+,p_sort_column_4=>'0'
+,p_sort_direction_4=>'ASC'
+,p_sort_column_5=>'0'
+,p_sort_direction_5=>'ASC'
+,p_sort_column_6=>'0'
+,p_sort_direction_6=>'ASC'
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_plug(
@@ -9076,7 +9569,7 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'C'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20200910005648'
+,p_last_upd_yyyymmddhh24miss=>'20200910221330'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(23214805682904400)
@@ -9196,7 +9689,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_api.id(23214805682904400)
 ,p_use_cache_before_default=>'NO'
-,p_prompt=>'Tstamp'
+,p_prompt=>'Date'
 ,p_format_mask=>'YYYY-MM-DD'
 ,p_source=>'TSTAMP'
 ,p_source_type=>'DB_COLUMN'
@@ -9218,55 +9711,48 @@ wwv_flow_api.create_page_item(
 ,p_prompt=>'Client Number'
 ,p_source=>'CLIENT_NUMBER'
 ,p_source_type=>'DB_COLUMN'
-,p_display_as=>'NATIVE_POPUP_LOV'
-,p_named_lov=>'ENGIECLIENTNUMBERS'
+,p_display_as=>'NATIVE_AUTO_COMPLETE'
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'select ',
-'    distinct CLIENT_NUMBER as d',
-'    ,rownum as r',
-'  from ENGIE',
-' order by 1'))
-,p_lov_display_null=>'YES'
-,p_cSize=>32
-,p_cMaxlength=>255
+'SELECT ',
+'    DISTINCT CLIENT_NUMBER ',
+'FROM ENGIE ',
+'    ORDER BY 1'))
+,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(23193884031842949)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
-,p_attribute_01=>'NOT_ENTERABLE'
-,p_attribute_02=>'FIRST_ROWSET'
+,p_attribute_01=>'CONTAINS_IGNORE'
+,p_attribute_04=>'N'
+,p_attribute_06=>'N'
+,p_attribute_07=>'Y'
+,p_attribute_08=>'Y'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(23219419400904416)
-,p_name=>'P4_PEAK_CONSUMPTION'
+,p_name=>'P4_PEAK_INDEX'
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_api.id(23214805682904400)
 ,p_use_cache_before_default=>'NO'
-,p_prompt=>'Peak Consumption'
-,p_source=>'PEAK_CONSUMPTION'
+,p_prompt=>'Peak Index'
+,p_source=>'PEAK_INDEX'
 ,p_source_type=>'DB_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>32
-,p_cMaxlength=>255
-,p_cHeight=>1
-,p_label_alignment=>'RIGHT'
 ,p_field_template=>wwv_flow_api.id(23193884031842949)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_03=>'right'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(23219884245904416)
-,p_name=>'P4_OFF_PEAK_CONSUMPTION'
+,p_name=>'P4_OFF_PEAK_INDEX'
 ,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_api.id(23214805682904400)
 ,p_use_cache_before_default=>'NO'
-,p_prompt=>'Off Peak Consumption'
-,p_source=>'OFF_PEAK_CONSUMPTION'
+,p_prompt=>'Off Peak Index'
+,p_source=>'OFF_PEAK_INDEX'
 ,p_source_type=>'DB_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>32
-,p_cMaxlength=>255
-,p_cHeight=>1
-,p_label_alignment=>'RIGHT'
 ,p_field_template=>wwv_flow_api.id(23193884031842949)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_03=>'right'
@@ -9280,12 +9766,11 @@ wwv_flow_api.create_page_item(
 ,p_prompt=>'Year'
 ,p_source=>'YEAR'
 ,p_source_type=>'DB_COLUMN'
-,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(23193884031842949)
 ,p_item_template_options=>'#DEFAULT#'
-,p_attribute_01=>'Y'
-,p_attribute_02=>'VALUE'
-,p_attribute_04=>'Y'
+,p_attribute_03=>'right'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(23220676677904417)
@@ -9296,12 +9781,11 @@ wwv_flow_api.create_page_item(
 ,p_prompt=>'Month'
 ,p_source=>'MONTH'
 ,p_source_type=>'DB_COLUMN'
-,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(23193884031842949)
 ,p_item_template_options=>'#DEFAULT#'
-,p_attribute_01=>'Y'
-,p_attribute_02=>'VALUE'
-,p_attribute_04=>'Y'
+,p_attribute_03=>'right'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(23221085758904417)
@@ -9312,12 +9796,11 @@ wwv_flow_api.create_page_item(
 ,p_prompt=>'Day'
 ,p_source=>'DAY'
 ,p_source_type=>'DB_COLUMN'
-,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(23193884031842949)
 ,p_item_template_options=>'#DEFAULT#'
-,p_attribute_01=>'Y'
-,p_attribute_02=>'VALUE'
-,p_attribute_04=>'Y'
+,p_attribute_03=>'right'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(23221490893904418)
@@ -9328,19 +9811,20 @@ wwv_flow_api.create_page_item(
 ,p_prompt=>'Weekday'
 ,p_source=>'WEEKDAY'
 ,p_source_type=>'DB_COLUMN'
-,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'WEEKDAYS'
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'select WEEKDAY_NAME as d,',
 '       ID_WEEKDAY as r',
 '  from WEEKDAYS',
 ' order by 1'))
+,p_lov_display_null=>'YES'
+,p_cHeight=>1
 ,p_field_template=>wwv_flow_api.id(23193884031842949)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
-,p_attribute_01=>'Y'
-,p_attribute_02=>'VALUE'
-,p_attribute_04=>'Y'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
 );
 wwv_flow_api.create_page_validation(
  p_id=>wwv_flow_api.id(23218790836904415)
@@ -9413,6 +9897,2812 @@ wwv_flow_api.create_page_process(
 ,p_attribute_01=>'CLEAR_CACHE_CURRENT_PAGE'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_api.id(23215431923904401)
+);
+end;
+/
+prompt --application/pages/page_00005
+begin
+wwv_flow_api.create_page(
+ p_id=>5
+,p_user_interface_id=>wwv_flow_api.id(23205127151842980)
+,p_name=>'CONSUMPTION'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'CONSUMPTION'
+,p_step_sub_title=>'CONSUMPTION'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20221011104954'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23256733630542369)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23175992985842930)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(23206486341843004)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(23194890188842952)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23257355068542370)
+,p_plug_name=>'CONSUMPTION'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23171038658842927)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select ID,',
+'       TSTAMP,',
+'       CLIENT_NUMBER,',
+'       PEAK_INDEX,',
+'       PEAK_CONSUMPTION,',
+'       OFF_PEAK_INDEX,',
+'       OFF_PEAK_CONSUMPTION,',
+'       TOTAL_CONSUMPTION,',
+'       PERIOD,',
+'       PER_DAY,',
+'       YEAR,',
+'       MONTH,',
+'       DAY,',
+'       WEEKDAY',
+'  from V_ENGIE_CONSIMPTION'))
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(23257452531542370)
+,p_name=>'CONSUMPTION'
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'N'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>23257452531542370
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23257868677542373)
+,p_db_column_name=>'ID'
+,p_display_order=>1
+,p_column_identifier=>'A'
+,p_column_label=>'Id'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23258294623542373)
+,p_db_column_name=>'TSTAMP'
+,p_display_order=>2
+,p_column_identifier=>'B'
+,p_column_label=>'Tstamp'
+,p_column_type=>'DATE'
+,p_heading_alignment=>'LEFT'
+,p_format_mask=>'YYYY-MM-DD'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23258626922542374)
+,p_db_column_name=>'CLIENT_NUMBER'
+,p_display_order=>3
+,p_column_identifier=>'C'
+,p_column_label=>'Client Number'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23259072728542374)
+,p_db_column_name=>'PEAK_INDEX'
+,p_display_order=>4
+,p_column_identifier=>'D'
+,p_column_label=>'Peak Index'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23259404635542375)
+,p_db_column_name=>'PEAK_CONSUMPTION'
+,p_display_order=>5
+,p_column_identifier=>'E'
+,p_column_label=>'Peak Consumption'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23259822604542375)
+,p_db_column_name=>'OFF_PEAK_INDEX'
+,p_display_order=>6
+,p_column_identifier=>'F'
+,p_column_label=>'Off Peak Index'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23260268992542376)
+,p_db_column_name=>'OFF_PEAK_CONSUMPTION'
+,p_display_order=>7
+,p_column_identifier=>'G'
+,p_column_label=>'Off Peak Consumption'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23260628425542376)
+,p_db_column_name=>'TOTAL_CONSUMPTION'
+,p_display_order=>8
+,p_column_identifier=>'H'
+,p_column_label=>'Total Consumption'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(22841891343498425)
+,p_db_column_name=>'PERIOD'
+,p_display_order=>18
+,p_column_identifier=>'M'
+,p_column_label=>'Period'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(22841975939498426)
+,p_db_column_name=>'PER_DAY'
+,p_display_order=>28
+,p_column_identifier=>'N'
+,p_column_label=>'Per day'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23261015486542377)
+,p_db_column_name=>'YEAR'
+,p_display_order=>38
+,p_column_identifier=>'I'
+,p_column_label=>'Year'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23261456576542378)
+,p_db_column_name=>'MONTH'
+,p_display_order=>48
+,p_column_identifier=>'J'
+,p_column_label=>'Month'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23261860246542378)
+,p_db_column_name=>'DAY'
+,p_display_order=>58
+,p_column_identifier=>'K'
+,p_column_label=>'Day'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(22843342550498440)
+,p_db_column_name=>'WEEKDAY'
+,p_display_order=>68
+,p_column_identifier=>'O'
+,p_column_label=>'Weekday'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(23262627991543831)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'232627'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'ID:TSTAMP:CLIENT_NUMBER:PEAK_INDEX:PEAK_CONSUMPTION:OFF_PEAK_INDEX:OFF_PEAK_CONSUMPTION:TOTAL_CONSUMPTION:PERIOD:PER_DAY:YEAR:MONTH:DAY'
+,p_flashback_enabled=>'N'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(25640725676874423)
+,p_plug_name=>'CONSUMPTION REPORT'
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23171038658842927)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT ',
+'    "YEAR",',
+'    "MONTH",',
+'    CLIENT_NUMBER,',
+'    PEAK_CONSUMPTION,',
+'    OFF_PEAK_CONSUMPTION,',
+'    TOTAL_CONSUMPTION',
+'FROM V_ENGIE_CONSUMPTION_REPORT',
+'ORDER BY "YEAR", "MONTH", CLIENT_NUMBER ;',
+''))
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_document_header=>'APEX'
+,p_prn_units=>'INCHES'
+,p_prn_paper_size=>'LETTER'
+,p_prn_width=>11
+,p_prn_height=>8.5
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#9bafde'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'normal'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#efefef'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(25640843164874424)
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'N'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>25640843164874424
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25641137299874427)
+,p_db_column_name=>'CLIENT_NUMBER'
+,p_display_order=>30
+,p_column_identifier=>'A'
+,p_column_label=>'Client Number'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25641315129874429)
+,p_db_column_name=>'PEAK_CONSUMPTION'
+,p_display_order=>50
+,p_column_identifier=>'B'
+,p_column_label=>'Peak Consumption'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25641552693874431)
+,p_db_column_name=>'OFF_PEAK_CONSUMPTION'
+,p_display_order=>70
+,p_column_identifier=>'C'
+,p_column_label=>'Off Peak Consumption'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25641651074874432)
+,p_db_column_name=>'TOTAL_CONSUMPTION'
+,p_display_order=>80
+,p_column_identifier=>'D'
+,p_column_label=>'Total Consumption'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25641741547874433)
+,p_db_column_name=>'YEAR'
+,p_display_order=>90
+,p_column_identifier=>'E'
+,p_column_label=>'Year'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(25641866151874434)
+,p_db_column_name=>'MONTH'
+,p_display_order=>100
+,p_column_identifier=>'F'
+,p_column_label=>'Month'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(25795354670626698)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'257954'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'YEAR:MONTH:CLIENT_NUMBER:PEAK_CONSUMPTION:OFF_PEAK_CONSUMPTION:TOTAL_CONSUMPTION:'
+,p_flashback_enabled=>'N'
+);
+end;
+/
+prompt --application/pages/page_00006
+begin
+wwv_flow_api.create_page(
+ p_id=>6
+,p_user_interface_id=>wwv_flow_api.id(23205127151842980)
+,p_name=>'CONSUMPTION'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'CONSUMPTION'
+,p_step_sub_title=>'CONSUMPTION'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20221205071634'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23264414932575824)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23175992985842930)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(23206486341843004)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(23194890188842952)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(25642361750874439)
+,p_plug_name=>'CONSUMPTION'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(23171518336842928)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source_type=>'NATIVE_JET_CHART'
+,p_plug_query_num_rows=>15
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_jet_chart(
+ p_id=>wwv_flow_api.id(25642498215874440)
+,p_region_id=>wwv_flow_api.id(25642361750874439)
+,p_chart_type=>'bar'
+,p_height=>'400'
+,p_animation_on_display=>'auto'
+,p_animation_on_data_change=>'auto'
+,p_orientation=>'vertical'
+,p_data_cursor=>'auto'
+,p_data_cursor_behavior=>'auto'
+,p_hide_and_show_behavior=>'withRescale'
+,p_hover_behavior=>'dim'
+,p_stack=>'off'
+,p_zoom_and_scroll=>'off'
+,p_tooltip_rendered=>'Y'
+,p_show_series_name=>true
+,p_show_group_name=>true
+,p_show_value=>true
+,p_show_label=>true
+,p_legend_rendered=>'on'
+,p_legend_position=>'top'
+,p_javascript_code=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'function( options ){',
+'     options.sorting = "ascending";',
+'     return options;',
+'}'))
+);
+wwv_flow_api.create_jet_chart_series(
+ p_id=>wwv_flow_api.id(25642574880874441)
+,p_chart_id=>wwv_flow_api.id(25642498215874440)
+,p_seq=>10
+,p_name=>'ConsumptionPerMonth'
+,p_data_source_type=>'SQL_QUERY'
+,p_data_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT ',
+'    YEAR,',
+'    MONTH,',
+'    SUM(TOTAL_CONSUMPTION) AS TOTAL_CONSUMPTION',
+'FROM V_ENGIE_CONSIMPTION vec',
+'GROUP BY YEAR, MONTH',
+'ORDER BY YEAR, MONTH'))
+,p_series_name_column_name=>'YEAR'
+,p_items_value_column_name=>'TOTAL_CONSUMPTION'
+,p_items_label_column_name=>'MONTH'
+,p_assigned_to_y2=>'off'
+,p_items_label_rendered=>true
+,p_items_label_position=>'auto'
+,p_security_scheme=>'MUST_NOT_BE_PUBLIC_USER'
+);
+wwv_flow_api.create_jet_chart_axis(
+ p_id=>wwv_flow_api.id(25642601644874442)
+,p_chart_id=>wwv_flow_api.id(25642498215874440)
+,p_axis=>'x'
+,p_is_rendered=>'on'
+,p_format_scaling=>'auto'
+,p_scaling=>'linear'
+,p_baseline_scaling=>'zero'
+,p_major_tick_rendered=>'auto'
+,p_minor_tick_rendered=>'auto'
+,p_tick_label_rendered=>'on'
+,p_tick_label_rotation=>'auto'
+,p_tick_label_position=>'outside'
+);
+wwv_flow_api.create_jet_chart_axis(
+ p_id=>wwv_flow_api.id(25642760653874443)
+,p_chart_id=>wwv_flow_api.id(25642498215874440)
+,p_axis=>'y'
+,p_is_rendered=>'on'
+,p_format_scaling=>'auto'
+,p_scaling=>'linear'
+,p_baseline_scaling=>'zero'
+,p_position=>'auto'
+,p_major_tick_rendered=>'auto'
+,p_minor_tick_rendered=>'auto'
+,p_tick_label_rendered=>'on'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(25643237687874448)
+,p_plug_name=>'CONSUMPTION per YEAR'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(23171518336842928)
+,p_plug_display_sequence=>30
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source_type=>'NATIVE_JET_CHART'
+,p_plug_query_num_rows=>15
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_jet_chart(
+ p_id=>wwv_flow_api.id(25643396813874449)
+,p_region_id=>wwv_flow_api.id(25643237687874448)
+,p_chart_type=>'bar'
+,p_height=>'400'
+,p_animation_on_display=>'auto'
+,p_animation_on_data_change=>'auto'
+,p_orientation=>'vertical'
+,p_data_cursor=>'auto'
+,p_data_cursor_behavior=>'auto'
+,p_hide_and_show_behavior=>'withRescale'
+,p_hover_behavior=>'dim'
+,p_stack=>'off'
+,p_zoom_and_scroll=>'off'
+,p_tooltip_rendered=>'Y'
+,p_show_series_name=>true
+,p_show_group_name=>true
+,p_show_value=>true
+,p_show_label=>true
+,p_legend_rendered=>'on'
+,p_legend_position=>'top'
+,p_javascript_code=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'function( options ){',
+'     options.sorting = "ascending";',
+'     return options;',
+'}'))
+);
+wwv_flow_api.create_jet_chart_series(
+ p_id=>wwv_flow_api.id(25643499282874450)
+,p_chart_id=>wwv_flow_api.id(25643396813874449)
+,p_seq=>10
+,p_name=>'Total Consumption'
+,p_data_source_type=>'SQL_QUERY'
+,p_data_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT ',
+'    YEAR,',
+'    AVG(PEAK_CONSUMPTION) AS AVG_TOTAL_CONSUMPTION,',
+'    SUM(TOTAL_CONSUMPTION) AS TOTAL_CONSUMPTION',
+'FROM V_ENGIE_CONSIMPTION vec',
+'GROUP BY YEAR',
+'ORDER BY YEAR'))
+,p_items_value_column_name=>'TOTAL_CONSUMPTION'
+,p_items_z_column_name=>'AVG_TOTAL_CONSUMPTION'
+,p_items_label_column_name=>'YEAR'
+,p_assigned_to_y2=>'off'
+,p_items_label_rendered=>true
+,p_items_label_position=>'auto'
+,p_security_scheme=>'MUST_NOT_BE_PUBLIC_USER'
+);
+wwv_flow_api.create_jet_chart_series(
+ p_id=>wwv_flow_api.id(25871486049316203)
+,p_chart_id=>wwv_flow_api.id(25643396813874449)
+,p_seq=>20
+,p_name=>'Peak Consumption'
+,p_data_source_type=>'SQL_QUERY'
+,p_data_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT ',
+'    YEAR,',
+'    SUM(PEAK_CONSUMPTION) AS PEAK_CONSUMPTION,',
+'    AVG(PEAK_CONSUMPTION) AS AVG_PEAK_CONSUMPTION',
+'FROM V_ENGIE_CONSIMPTION vec',
+'GROUP BY YEAR',
+'ORDER BY YEAR'))
+,p_items_value_column_name=>'PEAK_CONSUMPTION'
+,p_items_z_column_name=>'AVG_PEAK_CONSUMPTION'
+,p_items_label_column_name=>'YEAR'
+,p_assigned_to_y2=>'off'
+,p_items_label_rendered=>false
+);
+wwv_flow_api.create_jet_chart_series(
+ p_id=>wwv_flow_api.id(25871573352316204)
+,p_chart_id=>wwv_flow_api.id(25643396813874449)
+,p_seq=>30
+,p_name=>'Off Peak Consumption'
+,p_data_source_type=>'SQL_QUERY'
+,p_data_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT ',
+'    YEAR,',
+'    SUM(OFF_PEAK_CONSUMPTION) AS OFF_PEAK_CONSUMPTION,',
+'    AVG(OFF_PEAK_CONSUMPTION) AS AVG_OFF_PEAK_CONSUMPTION',
+'FROM V_ENGIE_CONSIMPTION vec',
+'GROUP BY YEAR',
+'ORDER BY YEAR'))
+,p_items_value_column_name=>'OFF_PEAK_CONSUMPTION'
+,p_items_z_column_name=>'AVG_OFF_PEAK_CONSUMPTION'
+,p_items_label_column_name=>'YEAR'
+,p_assigned_to_y2=>'off'
+,p_items_label_rendered=>false
+);
+wwv_flow_api.create_jet_chart_axis(
+ p_id=>wwv_flow_api.id(25871293026316201)
+,p_chart_id=>wwv_flow_api.id(25643396813874449)
+,p_axis=>'x'
+,p_is_rendered=>'on'
+,p_format_scaling=>'auto'
+,p_scaling=>'linear'
+,p_baseline_scaling=>'zero'
+,p_major_tick_rendered=>'auto'
+,p_minor_tick_rendered=>'auto'
+,p_tick_label_rendered=>'on'
+,p_tick_label_rotation=>'auto'
+,p_tick_label_position=>'outside'
+);
+wwv_flow_api.create_jet_chart_axis(
+ p_id=>wwv_flow_api.id(25871308764316202)
+,p_chart_id=>wwv_flow_api.id(25643396813874449)
+,p_axis=>'y'
+,p_is_rendered=>'on'
+,p_format_scaling=>'auto'
+,p_scaling=>'linear'
+,p_baseline_scaling=>'zero'
+,p_position=>'auto'
+,p_major_tick_rendered=>'auto'
+,p_minor_tick_rendered=>'auto'
+,p_tick_label_rendered=>'on'
+);
+end;
+/
+prompt --application/pages/page_00007
+begin
+wwv_flow_api.create_page(
+ p_id=>7
+,p_user_interface_id=>wwv_flow_api.id(23205127151842980)
+,p_name=>'PRICES'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'PRICES'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20200914233918'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23291260524744117)
+,p_plug_name=>'Report 1'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23171038658842927)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select "ID", ',
+'"PRICE",',
+'"COST",',
+'"DATE_EFF"',
+'from "#OWNER#"."ENGIE_PRICES" ',
+'ORDER BY DATE_EFF DESC, PRICE',
+'  ',
+''))
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(23291653793744118)
+,p_name=>'Report 1'
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'C'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_detail_link=>'f?p=&APP_ID.:8:&APP_SESSION.::::P8_ID:#ID#'
+,p_detail_link_text=>'<img src="#IMAGE_PREFIX#app_ui/img/icons/apex-edit-pencil.png" class="apex-edit-pencil" alt="Edit">'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>23291653793744118
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23291772880744119)
+,p_db_column_name=>'ID'
+,p_display_order=>1
+,p_column_identifier=>'A'
+,p_column_label=>'Id'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23292174407744120)
+,p_db_column_name=>'PRICE'
+,p_display_order=>2
+,p_column_identifier=>'B'
+,p_column_label=>'Price'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'LOV_ESCAPE_SC'
+,p_heading_alignment=>'LEFT'
+,p_rpt_named_lov=>wwv_flow_api.id(23306236955023048)
+,p_rpt_show_filter_lov=>'1'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23292548545744121)
+,p_db_column_name=>'COST'
+,p_display_order=>3
+,p_column_identifier=>'C'
+,p_column_label=>'Cost'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23292900277744122)
+,p_db_column_name=>'DATE_EFF'
+,p_display_order=>4
+,p_column_identifier=>'D'
+,p_column_label=>'Date Eff'
+,p_column_type=>'DATE'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(23295175870745533)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_type=>'REPORT'
+,p_report_alias=>'232952'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'ID:PRICE:COST:DATE_EFF'
+,p_sort_column_1=>'DATE_EFF'
+,p_sort_direction_1=>'DESC'
+,p_sort_column_2=>'PRICE'
+,p_sort_direction_2=>'ASC'
+,p_sort_column_3=>'COST'
+,p_sort_direction_3=>'ASC'
+,p_sort_column_4=>'0'
+,p_sort_direction_4=>'ASC'
+,p_sort_column_5=>'0'
+,p_sort_direction_5=>'ASC'
+,p_sort_column_6=>'0'
+,p_sort_direction_6=>'ASC'
+,p_flashback_enabled=>'N'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23293975711744124)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23175992985842930)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(23206486341843004)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(23194890188842952)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23293363407744122)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_api.id(23291260524744117)
+,p_button_name=>'CREATE'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Create'
+,p_button_position=>'RIGHT_OF_IR_SEARCH_BAR'
+,p_button_redirect_url=>'f?p=&APP_ID.:8:&SESSION.::&DEBUG.:8'
+,p_grid_new_grid=>false
+);
+end;
+/
+prompt --application/pages/page_00008
+begin
+wwv_flow_api.create_page(
+ p_id=>8
+,p_user_interface_id=>wwv_flow_api.id(23205127151842980)
+,p_name=>'PRICE'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'PRICE'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_javascript_code=>'var htmldb_delete_message=''"DELETE_CONFIRM_MSG"'';'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_protection_level=>'C'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20200914225341'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23284068248744102)
+,p_plug_name=>'Form on ENGIE_PRICES'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(23171518336842928)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_query_row_template=>1
+,p_attribute_01=>'N'
+,p_attribute_02=>'TEXT'
+,p_attribute_03=>'Y'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23294521462744125)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23175992985842930)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(23206486341843004)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(23194890188842952)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23284536950744103)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_api.id(23284068248744102)
+,p_button_name=>'SAVE'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Apply Changes'
+,p_button_position=>'REGION_TEMPLATE_CHANGE'
+,p_button_condition=>'P8_ID'
+,p_button_condition_type=>'ITEM_IS_NOT_NULL'
+,p_grid_new_grid=>false
+,p_database_action=>'UPDATE'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23284775010744103)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(23284068248744102)
+,p_button_name=>'CANCEL'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_image_alt=>'Cancel'
+,p_button_position=>'REGION_TEMPLATE_CLOSE'
+,p_button_redirect_url=>'f?p=&APP_ID.:7:&SESSION.::&DEBUG.:::'
+,p_grid_new_grid=>false
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23284405992744103)
+,p_button_sequence=>40
+,p_button_plug_id=>wwv_flow_api.id(23284068248744102)
+,p_button_name=>'CREATE'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Create'
+,p_button_position=>'REGION_TEMPLATE_CREATE'
+,p_button_condition=>'P8_ID'
+,p_button_condition_type=>'ITEM_IS_NULL'
+,p_grid_new_grid=>false
+,p_database_action=>'INSERT'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23284651335744103)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_api.id(23284068248744102)
+,p_button_name=>'DELETE'
+,p_button_action=>'REDIRECT_URL'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_image_alt=>'Delete'
+,p_button_position=>'REGION_TEMPLATE_DELETE'
+,p_button_redirect_url=>'javascript:apex.confirm(htmldb_delete_message,''DELETE'');'
+,p_button_execute_validations=>'N'
+,p_button_condition=>'P8_ID'
+,p_button_condition_type=>'ITEM_IS_NOT_NULL'
+,p_grid_new_grid=>false
+,p_database_action=>'DELETE'
+);
+wwv_flow_api.create_page_branch(
+ p_id=>wwv_flow_api.id(23286369150744106)
+,p_branch_action=>'f?p=&APP_ID.:7:&SESSION.&success_msg=#SUCCESS_MSG#'
+,p_branch_point=>'AFTER_PROCESSING'
+,p_branch_type=>'REDIRECT_URL'
+,p_branch_sequence=>1
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23286770836744106)
+,p_name=>'P8_ID'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(23284068248744102)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Id'
+,p_source=>'ID'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_HIDDEN'
+,p_label_alignment=>'RIGHT'
+,p_field_template=>wwv_flow_api.id(23193884031842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_protection_level=>'S'
+,p_attribute_01=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23287111450744108)
+,p_name=>'P8_PRICE'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_api.id(23284068248744102)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Price'
+,p_source=>'PRICE'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_named_lov=>'ENGIE_PRICES'
+,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select PRICE as d,',
+'       ID as r',
+'  from ENGIE_PRICE',
+' order by 1'))
+,p_lov_display_null=>'YES'
+,p_cHeight=>1
+,p_field_template=>wwv_flow_api.id(23193884031842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'YES'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23287573886744108)
+,p_name=>'P8_COST'
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_api.id(23284068248744102)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Cost'
+,p_source=>'COST'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_cSize=>32
+,p_cMaxlength=>255
+,p_cHeight=>1
+,p_label_alignment=>'RIGHT'
+,p_field_template=>wwv_flow_api.id(23193884031842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_03=>'right'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23287929234744109)
+,p_name=>'P8_DATE_EFF'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_api.id(23284068248744102)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Date Eff'
+,p_source=>'DATE_EFF'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_DATE_PICKER'
+,p_cSize=>32
+,p_cMaxlength=>255
+,p_cHeight=>1
+,p_label_alignment=>'RIGHT'
+,p_field_template=>wwv_flow_api.id(23193884031842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_04=>'button'
+,p_attribute_05=>'N'
+,p_attribute_07=>'NONE'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(23288735957744111)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_HEADER'
+,p_process_type=>'NATIVE_FORM_FETCH'
+,p_process_name=>'Fetch Row from ENGIE_PRICES'
+,p_attribute_02=>'ENGIE_PRICES'
+,p_attribute_03=>'P8_ID'
+,p_attribute_04=>'ID'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(23289196498744112)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_FORM_PROCESS'
+,p_process_name=>'Process Row of ENGIE_PRICES'
+,p_attribute_02=>'ENGIE_PRICES'
+,p_attribute_03=>'P8_ID'
+,p_attribute_04=>'ID'
+,p_attribute_11=>'I:U:D'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_success_message=>'Action Processed.'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(23289512380744112)
+,p_process_sequence=>40
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_SESSION_STATE'
+,p_process_name=>'reset page'
+,p_attribute_01=>'CLEAR_CACHE_CURRENT_PAGE'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(23284651335744103)
+);
+end;
+/
+prompt --application/pages/page_00009
+begin
+wwv_flow_api.create_page(
+ p_id=>9
+,p_user_interface_id=>wwv_flow_api.id(23205127151842980)
+,p_name=>'PAYMENT'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'PAYMENT'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_javascript_code=>'var htmldb_delete_message=''"DELETE_CONFIRM_MSG"'';'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_protection_level=>'C'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20201227142625'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23369512905932562)
+,p_plug_name=>'Form on ENGIE_PAYMENTS'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(23171518336842928)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_query_row_template=>1
+,p_attribute_01=>'N'
+,p_attribute_02=>'TEXT'
+,p_attribute_03=>'Y'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23380886147932637)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23175992985842930)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(23206486341843004)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(23194890188842952)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23370047934932564)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_api.id(23369512905932562)
+,p_button_name=>'SAVE'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Apply Changes'
+,p_button_position=>'REGION_TEMPLATE_CHANGE'
+,p_button_condition=>'P9_ROWID'
+,p_button_condition_type=>'ITEM_IS_NOT_NULL'
+,p_grid_new_grid=>false
+,p_database_action=>'UPDATE'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23370219753932564)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(23369512905932562)
+,p_button_name=>'CANCEL'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_image_alt=>'Cancel'
+,p_button_position=>'REGION_TEMPLATE_CLOSE'
+,p_button_redirect_url=>'f?p=&APP_ID.:2:&SESSION.::&DEBUG.:::'
+,p_grid_new_grid=>false
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23369997993932564)
+,p_button_sequence=>40
+,p_button_plug_id=>wwv_flow_api.id(23369512905932562)
+,p_button_name=>'CREATE'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Create'
+,p_button_position=>'REGION_TEMPLATE_CREATE'
+,p_button_condition=>'P9_ROWID'
+,p_button_condition_type=>'ITEM_IS_NULL'
+,p_grid_new_grid=>false
+,p_database_action=>'INSERT'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23370158401932564)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_api.id(23369512905932562)
+,p_button_name=>'DELETE'
+,p_button_action=>'REDIRECT_URL'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_image_alt=>'Delete'
+,p_button_position=>'REGION_TEMPLATE_DELETE'
+,p_button_redirect_url=>'javascript:apex.confirm(htmldb_delete_message,''DELETE'');'
+,p_button_execute_validations=>'N'
+,p_button_condition=>'P9_ROWID'
+,p_button_condition_type=>'ITEM_IS_NOT_NULL'
+,p_grid_new_grid=>false
+,p_database_action=>'DELETE'
+);
+wwv_flow_api.create_page_branch(
+ p_id=>wwv_flow_api.id(23371816923932569)
+,p_branch_action=>'f?p=&APP_ID.:2:&SESSION.&success_msg=#SUCCESS_MSG#'
+,p_branch_point=>'AFTER_PROCESSING'
+,p_branch_type=>'REDIRECT_URL'
+,p_branch_sequence=>1
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(22843557942498442)
+,p_name=>'P9_AP_ID'
+,p_item_sequence=>50
+,p_item_plug_id=>wwv_flow_api.id(23369512905932562)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Apartment'
+,p_source=>'AP_ID'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_POPUP_LOV'
+,p_named_lov=>'APARTMENTS'
+,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select a.AP_NUM as d,',
+'       a.AP_ID as r',
+'  from APARTMENTS a',
+' order by 1'))
+,p_lov_display_null=>'YES'
+,p_cSize=>30
+,p_field_template=>wwv_flow_api.id(23194053921842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'YES'
+,p_attribute_01=>'NOT_ENTERABLE'
+,p_attribute_02=>'FIRST_ROWSET'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23372135917932572)
+,p_name=>'P9_ROWID'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(23369512905932562)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Rowid'
+,p_source=>'ROWID'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_HIDDEN'
+,p_label_alignment=>'RIGHT'
+,p_field_template=>wwv_flow_api.id(23193884031842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_protection_level=>'S'
+,p_attribute_01=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23372545836932584)
+,p_name=>'P9_ID'
+,p_is_required=>true
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_api.id(23369512905932562)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Id'
+,p_source=>'ID'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_HIDDEN'
+,p_label_alignment=>'RIGHT'
+,p_field_template=>wwv_flow_api.id(23194053921842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23372941799932589)
+,p_name=>'P9_DATECOL'
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_api.id(23369512905932562)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Date'
+,p_source=>'DATECOL'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_DATE_PICKER'
+,p_cSize=>32
+,p_cMaxlength=>255
+,p_field_template=>wwv_flow_api.id(23194053921842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_04=>'button'
+,p_attribute_05=>'N'
+,p_attribute_07=>'NONE'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23373319976932590)
+,p_name=>'P9_AMOUNT'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_api.id(23369512905932562)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Amount'
+,p_source=>'AMOUNT'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_cSize=>32
+,p_cMaxlength=>255
+,p_field_template=>wwv_flow_api.id(23194053921842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_03=>'right'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(23375031246932593)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_HEADER'
+,p_process_type=>'NATIVE_FORM_FETCH'
+,p_process_name=>'Fetch Row from ENGIE_PAYMENTS'
+,p_attribute_02=>'ENGIE_PAYMENTS'
+,p_attribute_03=>'P9_ROWID'
+,p_attribute_04=>'ROWID'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(23375435233932594)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_FORM_PROCESS'
+,p_process_name=>'Process Row of ENGIE_PAYMENTS'
+,p_attribute_02=>'ENGIE_PAYMENTS'
+,p_attribute_03=>'P9_ROWID'
+,p_attribute_04=>'ROWID'
+,p_attribute_11=>'I:U:D'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_success_message=>'Action Processed.'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(23375858020932594)
+,p_process_sequence=>40
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_SESSION_STATE'
+,p_process_name=>'reset page'
+,p_attribute_01=>'CLEAR_CACHE_CURRENT_PAGE'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(23370158401932564)
+);
+end;
+/
+prompt --application/pages/page_00010
+begin
+wwv_flow_api.create_page(
+ p_id=>10
+,p_user_interface_id=>wwv_flow_api.id(23205127151842980)
+,p_name=>'APARTMENTS'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'APARTMENTS'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20201227134305'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23558553548801617)
+,p_plug_name=>'Report 1'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23171038658842927)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select "ROWID", ',
+'        "AP_ID",',
+'        "POSTCODE",',
+'        "BUILDING_ID",',
+'        "AP_NUM",',
+'        "CITY_ID",',
+'        "ADRESS"',
+'from "#OWNER#"."APARTMENTS" ',
+'order by "POSTCODE", "BUILDING_ID", "AP_NUM"',
+'  ',
+''))
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(23558830512801619)
+,p_name=>'Report 1'
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'C'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_detail_link=>'f?p=&APP_ID.:12:&APP_SESSION.::::P12_ROWID:#ROWID#'
+,p_detail_link_text=>'<img src="#IMAGE_PREFIX#app_ui/img/icons/apex-edit-pencil.png" class="apex-edit-pencil" alt="Edit">'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>23558830512801619
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23558997647801676)
+,p_db_column_name=>'ROWID'
+,p_display_order=>1
+,p_column_identifier=>'A'
+,p_column_label=>'ROWID'
+,p_allow_sorting=>'N'
+,p_allow_filtering=>'N'
+,p_allow_highlighting=>'N'
+,p_allow_ctrl_breaks=>'N'
+,p_allow_aggregations=>'N'
+,p_allow_computations=>'N'
+,p_allow_charting=>'N'
+,p_allow_group_by=>'N'
+,p_allow_pivot=>'N'
+,p_column_type=>'OTHER'
+,p_display_text_as=>'HIDDEN'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+,p_rpt_show_filter_lov=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23559320294801693)
+,p_db_column_name=>'AP_ID'
+,p_display_order=>2
+,p_column_identifier=>'B'
+,p_column_label=>'Ap Id'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23559671436801697)
+,p_db_column_name=>'POSTCODE'
+,p_display_order=>3
+,p_column_identifier=>'C'
+,p_column_label=>'Postcode'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23560851400801706)
+,p_db_column_name=>'CITY_ID'
+,p_display_order=>13
+,p_column_identifier=>'F'
+,p_column_label=>'City'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'LOV_ESCAPE_SC'
+,p_heading_alignment=>'LEFT'
+,p_rpt_named_lov=>wwv_flow_api.id(23566944913876312)
+,p_rpt_show_filter_lov=>'1'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23560094299801701)
+,p_db_column_name=>'BUILDING_ID'
+,p_display_order=>23
+,p_column_identifier=>'D'
+,p_column_label=>'Building'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23560469164801704)
+,p_db_column_name=>'AP_NUM'
+,p_display_order=>33
+,p_column_identifier=>'E'
+,p_column_label=>'Apartment #'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23561272220801708)
+,p_db_column_name=>'ADRESS'
+,p_display_order=>43
+,p_column_identifier=>'G'
+,p_column_label=>'Adress'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(23564779495812708)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'235648'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'AP_ID:POSTCODE:CITY_ID:ADRESS:BUILDING_ID:AP_NUM:'
+,p_flashback_enabled=>'N'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23564023925801762)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23175992985842930)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(23206486341843004)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(23194890188842952)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23562577650801741)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_api.id(23558553548801617)
+,p_button_name=>'CREATE'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Create'
+,p_button_position=>'RIGHT_OF_IR_SEARCH_BAR'
+,p_button_redirect_url=>'f?p=&APP_ID.:12:&SESSION.::&DEBUG.:12'
+,p_grid_new_grid=>false
+);
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(23561673249801711)
+,p_name=>'Edit Report - Dialog Closed'
+,p_event_sequence=>10
+,p_triggering_element_type=>'REGION'
+,p_triggering_region_id=>wwv_flow_api.id(23558553548801617)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'apexafterclosedialog'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(23562164288801739)
+,p_event_id=>wwv_flow_api.id(23561673249801711)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_api.id(23558553548801617)
+,p_stop_execution_on_error=>'Y'
+);
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(23562986067801746)
+,p_name=>'Create Button - Dialog Closed'
+,p_event_sequence=>20
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_api.id(23562577650801741)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'apexafterclosedialog'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(23563433774801749)
+,p_event_id=>wwv_flow_api.id(23562986067801746)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_api.id(23558553548801617)
+,p_stop_execution_on_error=>'Y'
+);
+end;
+/
+prompt --application/pages/page_00011
+begin
+wwv_flow_api.create_page(
+ p_id=>11
+,p_user_interface_id=>wwv_flow_api.id(23205127151842980)
+,p_name=>'COST'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'COST'
+,p_step_sub_title=>'COST'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20201214231456'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23384345166119311)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23175992985842930)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(23206486341843004)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(23194890188842952)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23384907373119312)
+,p_plug_name=>'COST'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23171038658842927)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select ID,',
+'       TSTAMP,',
+'       PEAK_CONSUMPTION,',
+'       PEAK_COST,',
+'       OFF_PEAK_CONSUMPTION,',
+'       OFF_PEAK_COST,',
+'       TOTAL_CONSUMPTION,',
+'       TOTAL_COST,',
+'       PERIOD,',
+'       PER_DAY',
+'  from V_ENGIE_COST',
+'  order by TSTAMP DESC'))
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(23385009337119312)
+,p_name=>'COST'
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'N'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>23385009337119312
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23385425427119314)
+,p_db_column_name=>'ID'
+,p_display_order=>1
+,p_column_identifier=>'A'
+,p_column_label=>'Id'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23385804183119315)
+,p_db_column_name=>'TSTAMP'
+,p_display_order=>2
+,p_column_identifier=>'B'
+,p_column_label=>'Date'
+,p_column_type=>'DATE'
+,p_heading_alignment=>'LEFT'
+,p_format_mask=>'YYYY-MM-DD'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23386240084119316)
+,p_db_column_name=>'PEAK_CONSUMPTION'
+,p_display_order=>3
+,p_column_identifier=>'C'
+,p_column_label=>'Peak Consumption'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23386677667119316)
+,p_db_column_name=>'PEAK_COST'
+,p_display_order=>4
+,p_column_identifier=>'D'
+,p_column_label=>'Peak Cost'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23387012973119317)
+,p_db_column_name=>'OFF_PEAK_CONSUMPTION'
+,p_display_order=>5
+,p_column_identifier=>'E'
+,p_column_label=>'Off Peak Consumption'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23387846802119318)
+,p_db_column_name=>'TOTAL_CONSUMPTION'
+,p_display_order=>7
+,p_column_identifier=>'G'
+,p_column_label=>'Total Consumption'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23388233511119319)
+,p_db_column_name=>'PERIOD'
+,p_display_order=>8
+,p_column_identifier=>'H'
+,p_column_label=>'Period'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23388679301119319)
+,p_db_column_name=>'PER_DAY'
+,p_display_order=>9
+,p_column_identifier=>'I'
+,p_column_label=>'Per Day'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(22843156757498438)
+,p_db_column_name=>'OFF_PEAK_COST'
+,p_display_order=>19
+,p_column_identifier=>'J'
+,p_column_label=>'Off peak cost'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(22843253791498439)
+,p_db_column_name=>'TOTAL_COST'
+,p_display_order=>29
+,p_column_identifier=>'K'
+,p_column_label=>'Total cost'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(23389278670127154)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'233893'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'ID:TSTAMP:PEAK_CONSUMPTION:PEAK_COST:OFF_PEAK_CONSUMPTION:TOTAL_CONSUMPTION:PERIOD:PER_DAY:OFF_PEAK_COST:TOTAL_COST'
+,p_flashback_enabled=>'N'
+);
+end;
+/
+prompt --application/pages/page_00012
+begin
+wwv_flow_api.create_page(
+ p_id=>12
+,p_user_interface_id=>wwv_flow_api.id(23205127151842980)
+,p_name=>'APARTMENT'
+,p_page_mode=>'MODAL'
+,p_step_title=>'APARTMENT'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_javascript_code=>'var htmldb_delete_message=''"DELETE_CONFIRM_MSG"'';'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_protection_level=>'C'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20201227144434'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23547366616801334)
+,p_plug_name=>'Form on APARTMENTS'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23161548676842920)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_query_row_template=>1
+,p_attribute_01=>'N'
+,p_attribute_02=>'TEXT'
+,p_attribute_03=>'Y'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23548031435801347)
+,p_plug_name=>'Buttons'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23161977560842920)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_03'
+,p_plug_query_row_template=>1
+,p_attribute_01=>'N'
+,p_attribute_02=>'TEXT'
+,p_attribute_03=>'Y'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23548465840801348)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(23548031435801347)
+,p_button_name=>'CANCEL'
+,p_button_action=>'DEFINED_BY_DA'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_image_alt=>'Cancel'
+,p_button_position=>'REGION_TEMPLATE_CLOSE'
+,p_grid_new_grid=>false
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23547959338801347)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_api.id(23548031435801347)
+,p_button_name=>'DELETE'
+,p_button_action=>'REDIRECT_URL'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_image_alt=>'Delete'
+,p_button_position=>'REGION_TEMPLATE_DELETE'
+,p_button_redirect_url=>'javascript:apex.confirm(htmldb_delete_message,''DELETE'');'
+,p_button_execute_validations=>'N'
+,p_button_condition=>'P12_ROWID'
+,p_button_condition_type=>'ITEM_IS_NOT_NULL'
+,p_grid_new_grid=>false
+,p_database_action=>'DELETE'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23547865448801347)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_api.id(23548031435801347)
+,p_button_name=>'SAVE'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Apply Changes'
+,p_button_position=>'REGION_TEMPLATE_NEXT'
+,p_button_condition=>'P12_ROWID'
+,p_button_condition_type=>'ITEM_IS_NOT_NULL'
+,p_grid_new_grid=>false
+,p_database_action=>'UPDATE'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23547751354801347)
+,p_button_sequence=>40
+,p_button_plug_id=>wwv_flow_api.id(23548031435801347)
+,p_button_name=>'CREATE'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Create'
+,p_button_position=>'REGION_TEMPLATE_NEXT'
+,p_button_condition=>'P12_ROWID'
+,p_button_condition_type=>'ITEM_IS_NULL'
+,p_grid_new_grid=>false
+,p_database_action=>'INSERT'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23550715311801414)
+,p_name=>'P12_ROWID'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(23547366616801334)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Rowid'
+,p_source=>'ROWID'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_HIDDEN'
+,p_label_alignment=>'RIGHT'
+,p_field_template=>wwv_flow_api.id(23193884031842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_protection_level=>'S'
+,p_attribute_01=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23551167014801475)
+,p_name=>'P12_AP_ID'
+,p_is_required=>true
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_api.id(23547366616801334)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Ap Id'
+,p_source=>'AP_ID'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_HIDDEN'
+,p_label_alignment=>'RIGHT'
+,p_field_template=>wwv_flow_api.id(23194053921842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23551472840801498)
+,p_name=>'P12_POSTCODE'
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_api.id(23547366616801334)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Postcode'
+,p_source=>'POSTCODE'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_cSize=>32
+,p_cMaxlength=>255
+,p_cHeight=>1
+,p_label_alignment=>'RIGHT'
+,p_field_template=>wwv_flow_api.id(23193884031842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_03=>'right'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23551824274801502)
+,p_name=>'P12_BUILDING_ID'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_api.id(23547366616801334)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Building'
+,p_source=>'BUILDING_ID'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_cSize=>32
+,p_cMaxlength=>255
+,p_field_template=>wwv_flow_api.id(23193884031842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_03=>'right'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23552208610801502)
+,p_name=>'P12_AP_NUM'
+,p_item_sequence=>50
+,p_item_plug_id=>wwv_flow_api.id(23547366616801334)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Apartment #'
+,p_source=>'AP_NUM'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_cSize=>32
+,p_cMaxlength=>255
+,p_field_template=>wwv_flow_api.id(23193884031842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_03=>'right'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23552658667801503)
+,p_name=>'P12_CITY_ID'
+,p_item_sequence=>60
+,p_item_plug_id=>wwv_flow_api.id(23547366616801334)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'City'
+,p_source=>'CITY_ID'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_named_lov=>'CITIES'
+,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select CITY as d,',
+'       CITY_ID as r',
+'  from CITY',
+' order by 1'))
+,p_lov_display_null=>'YES'
+,p_cHeight=>1
+,p_field_template=>wwv_flow_api.id(23193884031842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'YES'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23553035475801504)
+,p_name=>'P12_ADRESS'
+,p_item_sequence=>70
+,p_item_plug_id=>wwv_flow_api.id(23547366616801334)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Adress'
+,p_source=>'ADRESS'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_TEXTAREA'
+,p_cSize=>60
+,p_cMaxlength=>510
+,p_cHeight=>4
+,p_label_alignment=>'RIGHT'
+,p_field_template=>wwv_flow_api.id(23193884031842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'Y'
+,p_attribute_02=>'N'
+,p_attribute_03=>'N'
+,p_attribute_04=>'BOTH'
+);
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(23548556070801350)
+,p_name=>'Cancel Dialog'
+,p_event_sequence=>10
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_api.id(23548465840801348)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'click'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(23549395028801387)
+,p_event_id=>wwv_flow_api.id(23548556070801350)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_DIALOG_CANCEL'
+,p_stop_execution_on_error=>'Y'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(23555662972801517)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_HEADER'
+,p_process_type=>'NATIVE_FORM_FETCH'
+,p_process_name=>'Fetch Row from APARTMENTS'
+,p_attribute_02=>'APARTMENTS'
+,p_attribute_03=>'P12_ROWID'
+,p_attribute_04=>'ROWID'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(23556096671801518)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_FORM_PROCESS'
+,p_process_name=>'Process Row of APARTMENTS'
+,p_attribute_02=>'APARTMENTS'
+,p_attribute_03=>'P12_ROWID'
+,p_attribute_04=>'ROWID'
+,p_attribute_11=>'I:U:D'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_success_message=>'Action Processed.'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(23556443118801519)
+,p_process_sequence=>40
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_SESSION_STATE'
+,p_process_name=>'reset page'
+,p_attribute_01=>'CLEAR_CACHE_CURRENT_PAGE'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(23547959338801347)
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(23556879852801520)
+,p_process_sequence=>50
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_CLOSE_WINDOW'
+,p_process_name=>'Close Dialog'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when=>'CREATE,SAVE,DELETE'
+,p_process_when_type=>'REQUEST_IN_CONDITION'
+);
+end;
+/
+prompt --application/pages/page_00013
+begin
+wwv_flow_api.create_page(
+ p_id=>13
+,p_user_interface_id=>wwv_flow_api.id(23205127151842980)
+,p_name=>'PRICE_TYPES'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'PRICE_TYPES'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20200914225737'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23302369940998086)
+,p_plug_name=>'Report 1'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23171038658842927)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select "ID", ',
+'"PRICE"',
+'from "#OWNER#"."ENGIE_PRICE" ',
+'  ',
+''))
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(23302779556998087)
+,p_name=>'Report 1'
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'C'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_detail_link=>'f?p=&APP_ID.:14:&APP_SESSION.::::P14_ID:#ID#'
+,p_detail_link_text=>'<img src="#IMAGE_PREFIX#app_ui/img/icons/apex-edit-pencil.png" class="apex-edit-pencil" alt="Edit">'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>23302779556998087
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23302851224998088)
+,p_db_column_name=>'ID'
+,p_display_order=>1
+,p_column_identifier=>'A'
+,p_column_label=>'Id'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(23303247031998090)
+,p_db_column_name=>'PRICE'
+,p_display_order=>2
+,p_column_identifier=>'B'
+,p_column_label=>'Price'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(23305486247005638)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'233055'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'ID:PRICE'
+,p_sort_column_1=>'PRICE'
+,p_sort_direction_1=>'ASC'
+,p_flashback_enabled=>'N'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23304244143998092)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23175992985842930)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(23206486341843004)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(23194890188842952)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23303664321998091)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_api.id(23302369940998086)
+,p_button_name=>'CREATE'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Create'
+,p_button_position=>'RIGHT_OF_IR_SEARCH_BAR'
+,p_button_redirect_url=>'f?p=&APP_ID.:14:&SESSION.::&DEBUG.:14'
+,p_grid_new_grid=>false
+);
+end;
+/
+prompt --application/pages/page_00014
+begin
+wwv_flow_api.create_page(
+ p_id=>14
+,p_user_interface_id=>wwv_flow_api.id(23205127151842980)
+,p_name=>'PRICE_TYPE'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'PRICE_TYPE'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_javascript_code=>'var htmldb_delete_message=''"DELETE_CONFIRM_MSG"'';'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_protection_level=>'C'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20200914224329'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23296004102998072)
+,p_plug_name=>'Form on ENGIE_PRICE'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(23171518336842928)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_query_row_template=>1
+,p_attribute_01=>'N'
+,p_attribute_02=>'TEXT'
+,p_attribute_03=>'Y'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(23304812211998093)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23175992985842930)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(23206486341843004)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(23194890188842952)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23296569598998073)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_api.id(23296004102998072)
+,p_button_name=>'SAVE'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Apply Changes'
+,p_button_position=>'REGION_TEMPLATE_CHANGE'
+,p_button_condition=>'P14_ID'
+,p_button_condition_type=>'ITEM_IS_NOT_NULL'
+,p_grid_new_grid=>false
+,p_database_action=>'UPDATE'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23296711413998073)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(23296004102998072)
+,p_button_name=>'CANCEL'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_image_alt=>'Cancel'
+,p_button_position=>'REGION_TEMPLATE_CLOSE'
+,p_button_redirect_url=>'f?p=&APP_ID.:13:&SESSION.::&DEBUG.:::'
+,p_grid_new_grid=>false
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23296431735998073)
+,p_button_sequence=>40
+,p_button_plug_id=>wwv_flow_api.id(23296004102998072)
+,p_button_name=>'CREATE'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Create'
+,p_button_position=>'REGION_TEMPLATE_CREATE'
+,p_button_condition=>'P14_ID'
+,p_button_condition_type=>'ITEM_IS_NULL'
+,p_grid_new_grid=>false
+,p_database_action=>'INSERT'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(23296669701998073)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_api.id(23296004102998072)
+,p_button_name=>'DELETE'
+,p_button_action=>'REDIRECT_URL'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(23194367662842952)
+,p_button_image_alt=>'Delete'
+,p_button_position=>'REGION_TEMPLATE_DELETE'
+,p_button_redirect_url=>'javascript:apex.confirm(htmldb_delete_message,''DELETE'');'
+,p_button_execute_validations=>'N'
+,p_button_condition=>'P14_ID'
+,p_button_condition_type=>'ITEM_IS_NOT_NULL'
+,p_grid_new_grid=>false
+,p_database_action=>'DELETE'
+);
+wwv_flow_api.create_page_branch(
+ p_id=>wwv_flow_api.id(23298356099998076)
+,p_branch_action=>'f?p=&APP_ID.:13:&SESSION.&success_msg=#SUCCESS_MSG#'
+,p_branch_point=>'AFTER_PROCESSING'
+,p_branch_type=>'REDIRECT_URL'
+,p_branch_sequence=>1
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23298716718998078)
+,p_name=>'P14_ID'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(23296004102998072)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Id'
+,p_source=>'ID'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_HIDDEN'
+,p_label_alignment=>'RIGHT'
+,p_field_template=>wwv_flow_api.id(23193884031842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_protection_level=>'S'
+,p_attribute_01=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(23299190387998079)
+,p_name=>'P14_PRICE'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_api.id(23296004102998072)
+,p_use_cache_before_default=>'NO'
+,p_prompt=>'Price'
+,p_source=>'PRICE'
+,p_source_type=>'DB_COLUMN'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>32
+,p_cMaxlength=>50
+,p_label_alignment=>'RIGHT'
+,p_field_template=>wwv_flow_api.id(23193884031842949)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_03=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'NONE'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(23299804465998080)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_HEADER'
+,p_process_type=>'NATIVE_FORM_FETCH'
+,p_process_name=>'Fetch Row from ENGIE_PRICE'
+,p_attribute_02=>'ENGIE_PRICE'
+,p_attribute_03=>'P14_ID'
+,p_attribute_04=>'ID'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(23300294653998081)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_FORM_PROCESS'
+,p_process_name=>'Process Row of ENGIE_PRICE'
+,p_attribute_02=>'ENGIE_PRICE'
+,p_attribute_03=>'P14_ID'
+,p_attribute_04=>'ID'
+,p_attribute_11=>'I:U:D'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_success_message=>'Action Processed.'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(23300654599998082)
+,p_process_sequence=>40
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_SESSION_STATE'
+,p_process_name=>'reset page'
+,p_attribute_01=>'CLEAR_CACHE_CURRENT_PAGE'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(23296669701998073)
+);
+end;
+/
+prompt --application/pages/page_00015
+begin
+wwv_flow_api.create_page(
+ p_id=>15
+,p_user_interface_id=>wwv_flow_api.id(23205127151842980)
+,p_name=>'REPORTS'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'REPORTS'
+,p_step_sub_title=>'REPORTS'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20210611234933'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(24658146203367997)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23175992985842930)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(23206486341843004)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(23194890188842952)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(24658768400368003)
+,p_plug_name=>'REPORTS'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23171038658842927)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select ID,',
+'       TSTAMP,',
+'       CLIENT_NUMBER,',
+'       PEAK_INDEX,',
+'       PEAK_CONSUMPTION,',
+'       OFF_PEAK_INDEX,',
+'       OFF_PEAK_CONSUMPTION,',
+'       TOTAL_CONSUMPTION,',
+'       PERIOD,',
+'       PER_DAY,',
+'       YEAR,',
+'       MONTH,',
+'       DAY,',
+'       WEEKDAY',
+'  from V_ENGIE_CONSIMPTION'))
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(24658855088368003)
+,p_name=>'REPORTS'
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'N'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>24658855088368003
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(24659236549368018)
+,p_db_column_name=>'ID'
+,p_display_order=>1
+,p_column_identifier=>'A'
+,p_column_label=>'Id'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(24659683096368023)
+,p_db_column_name=>'TSTAMP'
+,p_display_order=>2
+,p_column_identifier=>'B'
+,p_column_label=>'Tstamp'
+,p_column_type=>'DATE'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(24660001610368024)
+,p_db_column_name=>'CLIENT_NUMBER'
+,p_display_order=>3
+,p_column_identifier=>'C'
+,p_column_label=>'Client Number'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(24660421862368025)
+,p_db_column_name=>'PEAK_INDEX'
+,p_display_order=>4
+,p_column_identifier=>'D'
+,p_column_label=>'Peak Index'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(24660858275368026)
+,p_db_column_name=>'PEAK_CONSUMPTION'
+,p_display_order=>5
+,p_column_identifier=>'E'
+,p_column_label=>'Peak Consumption'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(24661293260368028)
+,p_db_column_name=>'OFF_PEAK_INDEX'
+,p_display_order=>6
+,p_column_identifier=>'F'
+,p_column_label=>'Off Peak Index'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(24661614890368028)
+,p_db_column_name=>'OFF_PEAK_CONSUMPTION'
+,p_display_order=>7
+,p_column_identifier=>'G'
+,p_column_label=>'Off Peak Consumption'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(24662054353368030)
+,p_db_column_name=>'TOTAL_CONSUMPTION'
+,p_display_order=>8
+,p_column_identifier=>'H'
+,p_column_label=>'Total Consumption'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(24662408658368031)
+,p_db_column_name=>'PERIOD'
+,p_display_order=>9
+,p_column_identifier=>'I'
+,p_column_label=>'Period'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(24662860697368032)
+,p_db_column_name=>'PER_DAY'
+,p_display_order=>10
+,p_column_identifier=>'J'
+,p_column_label=>'Per Day'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(24663240062368034)
+,p_db_column_name=>'YEAR'
+,p_display_order=>11
+,p_column_identifier=>'K'
+,p_column_label=>'Year'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(24663679588368035)
+,p_db_column_name=>'MONTH'
+,p_display_order=>12
+,p_column_identifier=>'L'
+,p_column_label=>'Month'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(24664083213368036)
+,p_db_column_name=>'DAY'
+,p_display_order=>13
+,p_column_identifier=>'M'
+,p_column_label=>'Day'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(24664462113368038)
+,p_db_column_name=>'WEEKDAY'
+,p_display_order=>14
+,p_column_identifier=>'N'
+,p_column_label=>'Weekday'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(24665074468371264)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'246651'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'ID:TSTAMP:CLIENT_NUMBER:PEAK_INDEX:PEAK_CONSUMPTION:OFF_PEAK_INDEX:OFF_PEAK_CONSUMPTION:TOTAL_CONSUMPTION:PERIOD:PER_DAY:YEAR:MONTH:DAY:WEEKDAY'
+,p_flashback_enabled=>'N'
+);
+end;
+/
+prompt --application/pages/page_00016
+begin
+wwv_flow_api.create_page(
+ p_id=>16
+,p_user_interface_id=>wwv_flow_api.id(23205127151842980)
+,p_name=>'CONSUMPTION PER MONTH'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'Consumption Per Month'
+,p_step_sub_title=>'Consumption Per Month'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20221212114829'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(25639713068874413)
+,p_plug_name=>'Peak Consumption Per Month'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(23171518336842928)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source_type=>'NATIVE_JET_CHART'
+,p_plug_query_num_rows=>15
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_jet_chart(
+ p_id=>wwv_flow_api.id(25639896019874414)
+,p_region_id=>wwv_flow_api.id(25639713068874413)
+,p_chart_type=>'scatter'
+,p_height=>'400'
+,p_animation_on_display=>'auto'
+,p_animation_on_data_change=>'auto'
+,p_data_cursor=>'auto'
+,p_data_cursor_behavior=>'auto'
+,p_hide_and_show_behavior=>'withRescale'
+,p_hover_behavior=>'dim'
+,p_zoom_and_scroll=>'off'
+,p_tooltip_rendered=>'Y'
+,p_show_series_name=>true
+,p_show_group_name=>true
+,p_show_value=>true
+,p_show_label=>true
+,p_legend_rendered=>'on'
+,p_legend_position=>'top'
+);
+wwv_flow_api.create_jet_chart_series(
+ p_id=>wwv_flow_api.id(25639983811874415)
+,p_chart_id=>wwv_flow_api.id(25639896019874414)
+,p_seq=>10
+,p_name=>'Peak Consumption per month'
+,p_data_source_type=>'SQL_QUERY'
+,p_data_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT ',
+'    "YEAR"',
+'    ,"MONTH"',
+'    ,PEAK_CONSUMPTION',
+'    ,OFF_PEAK_CONSUMPTION',
+'    ,TOTAL_CONSUMPTION',
+'FROM UTILITIES.V_ENGIE_CONSUMPTION_REPORT',
+'WHERE CLIENT_NUMBER IS NULL',
+'AND "YEAR" IS NOT NULL',
+'AND "MONTH" IS NOT NULL;'))
+,p_series_name_column_name=>'YEAR'
+,p_items_x_column_name=>'MONTH'
+,p_items_y_column_name=>'PEAK_CONSUMPTION'
+,p_group_name_column_name=>'YEAR'
+,p_group_short_desc_column_name=>'YEAR'
+,p_items_label_column_name=>'YEAR'
+,p_items_short_desc_column_name=>'PEAK_CONSUMPTION'
+,p_custom_column_name=>'YEAR'
+,p_line_style=>'solid'
+,p_line_type=>'auto'
+,p_marker_rendered=>'auto'
+,p_marker_shape=>'auto'
+,p_items_label_rendered=>true
+,p_items_label_position=>'auto'
+);
+wwv_flow_api.create_jet_chart_axis(
+ p_id=>wwv_flow_api.id(25640162504874417)
+,p_chart_id=>wwv_flow_api.id(25639896019874414)
+,p_axis=>'y'
+,p_is_rendered=>'on'
+,p_format_scaling=>'auto'
+,p_scaling=>'linear'
+,p_baseline_scaling=>'zero'
+,p_position=>'auto'
+,p_major_tick_rendered=>'auto'
+,p_minor_tick_rendered=>'auto'
+,p_tick_label_rendered=>'on'
+);
+wwv_flow_api.create_jet_chart_axis(
+ p_id=>wwv_flow_api.id(25640000907874416)
+,p_chart_id=>wwv_flow_api.id(25639896019874414)
+,p_axis=>'x'
+,p_is_rendered=>'on'
+,p_format_scaling=>'auto'
+,p_scaling=>'linear'
+,p_baseline_scaling=>'zero'
+,p_major_tick_rendered=>'auto'
+,p_minor_tick_rendered=>'auto'
+,p_tick_label_rendered=>'on'
+,p_tick_label_rotation=>'auto'
+,p_tick_label_position=>'outside'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(25640290403874418)
+,p_plug_name=>'Off peak Consumption Per Month'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(23171518336842928)
+,p_plug_display_sequence=>30
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source_type=>'NATIVE_JET_CHART'
+,p_plug_query_num_rows=>15
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_jet_chart(
+ p_id=>wwv_flow_api.id(25640373567874419)
+,p_region_id=>wwv_flow_api.id(25640290403874418)
+,p_chart_type=>'scatter'
+,p_height=>'400'
+,p_animation_on_display=>'auto'
+,p_animation_on_data_change=>'auto'
+,p_data_cursor=>'auto'
+,p_data_cursor_behavior=>'auto'
+,p_hide_and_show_behavior=>'withRescale'
+,p_hover_behavior=>'dim'
+,p_zoom_and_scroll=>'off'
+,p_tooltip_rendered=>'Y'
+,p_show_series_name=>true
+,p_show_group_name=>true
+,p_show_value=>true
+,p_show_label=>true
+,p_legend_rendered=>'on'
+,p_legend_position=>'top'
+);
+wwv_flow_api.create_jet_chart_series(
+ p_id=>wwv_flow_api.id(25640413554874420)
+,p_chart_id=>wwv_flow_api.id(25640373567874419)
+,p_seq=>10
+,p_name=>'Peak Consumption per month'
+,p_data_source_type=>'SQL_QUERY'
+,p_data_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT ',
+'    "YEAR"',
+'    ,"MONTH"',
+'    ,PEAK_CONSUMPTION',
+'    ,OFF_PEAK_CONSUMPTION',
+'    ,TOTAL_CONSUMPTION',
+'FROM UTILITIES.V_ENGIE_CONSUMPTION_REPORT',
+'WHERE CLIENT_NUMBER IS NULL',
+'AND "YEAR" IS NOT NULL',
+'AND "MONTH" IS NOT NULL;'))
+,p_series_name_column_name=>'YEAR'
+,p_items_x_column_name=>'MONTH'
+,p_items_y_column_name=>'OFF_PEAK_CONSUMPTION'
+,p_group_name_column_name=>'YEAR'
+,p_group_short_desc_column_name=>'YEAR'
+,p_items_label_column_name=>'YEAR'
+,p_items_short_desc_column_name=>'OFF_PEAK_CONSUMPTION'
+,p_custom_column_name=>'YEAR'
+,p_line_style=>'solid'
+,p_line_type=>'auto'
+,p_marker_rendered=>'auto'
+,p_marker_shape=>'auto'
+,p_items_label_rendered=>true
+,p_items_label_position=>'auto'
+);
+wwv_flow_api.create_jet_chart_axis(
+ p_id=>wwv_flow_api.id(25640523373874421)
+,p_chart_id=>wwv_flow_api.id(25640373567874419)
+,p_axis=>'x'
+,p_is_rendered=>'on'
+,p_format_scaling=>'auto'
+,p_scaling=>'linear'
+,p_baseline_scaling=>'zero'
+,p_major_tick_rendered=>'auto'
+,p_minor_tick_rendered=>'auto'
+,p_tick_label_rendered=>'on'
+,p_tick_label_rotation=>'auto'
+,p_tick_label_position=>'outside'
+);
+wwv_flow_api.create_jet_chart_axis(
+ p_id=>wwv_flow_api.id(25640642057874422)
+,p_chart_id=>wwv_flow_api.id(25640373567874419)
+,p_axis=>'y'
+,p_is_rendered=>'on'
+,p_format_scaling=>'auto'
+,p_scaling=>'linear'
+,p_baseline_scaling=>'zero'
+,p_position=>'auto'
+,p_major_tick_rendered=>'auto'
+,p_minor_tick_rendered=>'auto'
+,p_tick_label_rendered=>'on'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(25753317905052680)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(23175992985842930)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(23206486341843004)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(23194890188842952)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(25753887850052691)
+,p_plug_name=>'Consumption Per Month'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(23171518336842928)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source_type=>'NATIVE_JET_CHART'
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_jet_chart(
+ p_id=>wwv_flow_api.id(25754259408052692)
+,p_region_id=>wwv_flow_api.id(25753887850052691)
+,p_chart_type=>'scatter'
+,p_height=>'400'
+,p_animation_on_display=>'auto'
+,p_animation_on_data_change=>'auto'
+,p_hide_and_show_behavior=>'withRescale'
+,p_hover_behavior=>'dim'
+,p_stack=>'off'
+,p_tooltip_rendered=>'Y'
+,p_show_series_name=>true
+,p_show_group_name=>true
+,p_show_value=>true
+,p_show_label=>true
+,p_legend_rendered=>'on'
+,p_legend_position=>'top'
+,p_overview_rendered=>'off'
+);
+wwv_flow_api.create_jet_chart_series(
+ p_id=>wwv_flow_api.id(25755954590052706)
+,p_chart_id=>wwv_flow_api.id(25754259408052692)
+,p_seq=>10
+,p_name=>'Total Consumption per month'
+,p_data_source_type=>'SQL_QUERY'
+,p_data_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT ',
+'    "YEAR"',
+'    ,"MONTH"',
+'    ,PEAK_CONSUMPTION',
+'    ,OFF_PEAK_CONSUMPTION',
+'    ,TOTAL_CONSUMPTION',
+'FROM UTILITIES.V_ENGIE_CONSUMPTION_REPORT',
+'WHERE CLIENT_NUMBER IS NULL',
+'AND "YEAR" IS NOT NULL',
+'AND "MONTH" IS NOT NULL;'))
+,p_series_name_column_name=>'YEAR'
+,p_items_x_column_name=>'MONTH'
+,p_items_y_column_name=>'TOTAL_CONSUMPTION'
+,p_group_name_column_name=>'YEAR'
+,p_group_short_desc_column_name=>'YEAR'
+,p_items_label_column_name=>'YEAR'
+,p_items_short_desc_column_name=>'TOTAL_CONSUMPTION'
+,p_custom_column_name=>'YEAR'
+,p_line_style=>'solid'
+,p_line_type=>'auto'
+,p_marker_rendered=>'auto'
+,p_marker_shape=>'auto'
+,p_items_label_rendered=>true
+,p_items_label_position=>'auto'
+);
+wwv_flow_api.create_jet_chart_axis(
+ p_id=>wwv_flow_api.id(25754780352052697)
+,p_chart_id=>wwv_flow_api.id(25754259408052692)
+,p_axis=>'x'
+,p_is_rendered=>'on'
+,p_baseline_scaling=>'zero'
+,p_major_tick_rendered=>'auto'
+,p_minor_tick_rendered=>'auto'
+,p_tick_label_rendered=>'on'
+);
+wwv_flow_api.create_jet_chart_axis(
+ p_id=>wwv_flow_api.id(25755338261052703)
+,p_chart_id=>wwv_flow_api.id(25754259408052692)
+,p_axis=>'y'
+,p_is_rendered=>'on'
+,p_baseline_scaling=>'zero'
+,p_position=>'auto'
+,p_major_tick_rendered=>'auto'
+,p_minor_tick_rendered=>'auto'
+,p_tick_label_rendered=>'on'
 );
 end;
 /
