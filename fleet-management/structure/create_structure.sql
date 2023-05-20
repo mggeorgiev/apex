@@ -563,11 +563,20 @@ end;
 /
 ALTER TRIGGER  "BI_CLASSIFICATION" ENABLE
 /
-CREATE OR REPLACE TRIGGER  "BI_CARS"   before insert on "CARS"                 for each row    if :NEW."ID_CAR" is null then     select "CARS_SEQ".nextval into :NEW."ID_CAR" from dual;   end if; end; 
+
+CREATE OR REPLACE trigger "BI_CARS"   
+  before insert on "CARS"               
+  for each row  
+begin   
+  if :NEW."ID_CAR" is null then 
+    select "CARS_SEQ".nextval into :NEW."ID_CAR" from dual; 
+  end if; 
+end; 
 /
+
 ALTER TRIGGER  "BI_CARS" ENABLE
 /
-CREATE OR REPLACE TRIGGER  "AI_FUEL_APP_FUEL" 
+CREATE OR REPLACE TRIGGER "AI_FUEL_APP_FUEL" 
     AFTER insert on "FUEL_APP"
     for each row
     follows "AI_FUEL_APP_CALENDAR"
@@ -604,7 +613,6 @@ CREATE OR REPLACE TRIGGER  "AI_FUEL_APP_FUEL"
                 ,:new.CURRENCY
             FROM DUAL;
     end;
-
 /
 ALTER TRIGGER  "AI_FUEL_APP_FUEL" ENABLE
 /
