@@ -27,7 +27,7 @@ prompt APPLICATION 112 - CNS
 -- Application Export:
 --   Application:     112
 --   Name:            CNS
---   Date and Time:   19:13 Sunday July 9, 2023
+--   Date and Time:   17:49 Thursday July 20, 2023
 --   Exported By:     GEORGIEM
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -108,7 +108,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20230709190927'
+,p_last_upd_yyyymmddhh24miss=>'20230720162427'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -11065,7 +11065,7 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'C'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20230709183427'
+,p_last_upd_yyyymmddhh24miss=>'20230720162427'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(24768121965213162)
@@ -11160,14 +11160,23 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>80
 ,p_item_plug_id=>wwv_flow_api.id(24768121965213162)
 ,p_use_cache_before_default=>'NO'
-,p_prompt=>'CNS reference'
+,p_prompt=>'CNS ID'
 ,p_source=>'CNS_REFERENCE'
 ,p_source_type=>'DB_COLUMN'
-,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_display_as=>'NATIVE_POPUP_LOV'
+,p_named_lov=>'CNS_REFERENCE'
+,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select distinct id as d,',
+'       id as r',
+'  from CNS_payment',
+' order by 1'))
+,p_lov_display_null=>'YES'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(24720790886153266)
 ,p_item_template_options=>'#DEFAULT#'
-,p_attribute_03=>'right'
+,p_lov_display_extra=>'YES'
+,p_attribute_01=>'NOT_ENTERABLE'
+,p_attribute_02=>'FIRST_ROWSET'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(24771650125213171)
