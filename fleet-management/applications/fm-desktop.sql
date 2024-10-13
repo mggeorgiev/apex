@@ -27,7 +27,7 @@ prompt APPLICATION 106 - FLEET MANAGEMENT
 -- Application Export:
 --   Application:     106
 --   Name:            FLEET MANAGEMENT
---   Date and Time:   22:33 Tuesday May 31, 2022
+--   Date and Time:   10:26 Sunday October 13, 2024
 --   Exported By:     GEORGIEM
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -36,11 +36,11 @@ prompt APPLICATION 106 - FLEET MANAGEMENT
 --
 
 -- Application Statistics:
---   Pages:                     34
+--   Pages:                     35
 --     Items:                   79
 --     Validations:              3
 --     Processes:               42
---     Regions:                 57
+--     Regions:                 63
 --     Buttons:                 52
 --     Dynamic Actions:         26
 --   Shared Components:
@@ -48,7 +48,7 @@ prompt APPLICATION 106 - FLEET MANAGEMENT
 --     Navigation:
 --       Lists:                  3
 --       Breadcrumbs:            1
---         Entries:             11
+--         Entries:             12
 --     Security:
 --       Authentication:         1
 --       Authorization:          3
@@ -112,7 +112,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20220531223009'
+,p_last_upd_yyyymmddhh24miss=>'20241013102523'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -168,7 +168,7 @@ wwv_flow_api.create_list_item(
 ,p_list_item_link_target=>'f?p=&APP_ID.:3:&SESSION.::&DEBUG.::::'
 ,p_list_item_icon=>'fa-calendar-chart'
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
-,p_list_item_current_for_pages=>'3,4,13,5,14,18,22,17,24,25,27,32'
+,p_list_item_current_for_pages=>'3,4,13,5,14,18,22,17,24,25,27,32,33'
 );
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(17801225530333884)
@@ -241,6 +241,15 @@ wwv_flow_api.create_list_item(
 ,p_parent_list_item_id=>wwv_flow_api.id(14899194180135790)
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'25'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(26344336005027226)
+,p_list_item_display_sequence=>290
+,p_list_item_link_text=>'SURPRISE INDEXES'
+,p_list_item_link_target=>'f?p=&APP_ID.:33:&SESSION.::&DEBUG.'
+,p_parent_list_item_id=>wwv_flow_api.id(14899194180135790)
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'33'
 );
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(17685373721585746)
@@ -733,7 +742,7 @@ wwv_flow_api.create_list_of_values(
 '	,ID_CAR',
 '	FROM CARS',
 '    --WHERE ACTIVE = 1',
-'    ORDER BY NAME;',
+'    ORDER BY ACTIVE DESC, NAME;',
 ''))
 );
 wwv_flow_api.create_list_of_values(
@@ -814,6 +823,10 @@ begin
 wwv_flow_api.create_page_group(
  p_id=>wwv_flow_api.id(14920874337429692)
 ,p_group_name=>'MANAGEMENT'
+);
+wwv_flow_api.create_page_group(
+ p_id=>wwv_flow_api.id(26342057431122699)
+,p_group_name=>'REPORTING'
 );
 end;
 /
@@ -898,9 +911,16 @@ wwv_flow_api.create_menu_option(
 wwv_flow_api.create_menu_option(
  p_id=>wwv_flow_api.id(23505258090558857)
 ,p_parent_id=>wwv_flow_api.id(22068173843709049)
-,p_short_name=>'FUEL COMSULPTION'
-,p_link=>'f?p=&APP_ID.:32:&SESSION.'
+,p_short_name=>'FUEL CONSUMPTION'
+,p_link=>'f?p=&APP_ID.:32:&SESSION.::&DEBUG.:::'
 ,p_page_id=>32
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(26354695078027473)
+,p_parent_id=>wwv_flow_api.id(22068173843709049)
+,p_short_name=>'SURPRISE INDEXES'
+,p_link=>'f?p=&APP_ID.:33:&SESSION.'
+,p_page_id=>33
 );
 end;
 /
@@ -9480,7 +9500,7 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'C'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20210130104715'
+,p_last_upd_yyyymmddhh24miss=>'20230730104523'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(15039550685062284)
@@ -9598,7 +9618,7 @@ wwv_flow_api.create_page_item(
 '	,ID_CAR',
 '	FROM CARS',
 '    --WHERE ACTIVE = 1',
-'    ORDER BY NAME;',
+'    ORDER BY ACTIVE DESC, NAME;',
 ''))
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
@@ -11005,6 +11025,7 @@ wwv_flow_api.create_page(
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
 ,p_autocomplete_on_off=>'OFF'
+,p_group_id=>wwv_flow_api.id(14920874337429692)
 ,p_javascript_code=>'var htmldb_delete_message=''"DELETE_CONFIRM_MSG"'';'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_dialog_chained=>'Y'
@@ -11013,7 +11034,7 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'C'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20210130104715'
+,p_last_upd_yyyymmddhh24miss=>'20241012092503'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(16556806948701227)
@@ -11126,7 +11147,7 @@ wwv_flow_api.create_page_item(
 '	,ID_CAR',
 '	FROM CARS',
 '    --WHERE ACTIVE = 1',
-'    ORDER BY NAME;',
+'    ORDER BY ACTIVE DESC, NAME;',
 ''))
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
@@ -12267,13 +12288,14 @@ wwv_flow_api.create_page(
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
 ,p_autocomplete_on_off=>'OFF'
+,p_group_id=>wwv_flow_api.id(14920874337429692)
 ,p_page_template_options=>'#DEFAULT#'
 ,p_dialog_chained=>'Y'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20190303224551'
+,p_last_upd_yyyymmddhh24miss=>'20241012092503'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(14920143428423373)
@@ -13843,13 +13865,14 @@ wwv_flow_api.create_page(
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
 ,p_autocomplete_on_off=>'OFF'
+,p_group_id=>wwv_flow_api.id(26342057431122699)
 ,p_page_template_options=>'#DEFAULT#'
 ,p_dialog_chained=>'Y'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20190801183435'
+,p_last_upd_yyyymmddhh24miss=>'20241012092525'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(19630214370474277)
@@ -14011,12 +14034,13 @@ wwv_flow_api.create_page(
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
 ,p_autocomplete_on_off=>'OFF'
+,p_group_id=>wwv_flow_api.id(26342057431122699)
 ,p_page_template_options=>'#DEFAULT#'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20190404100818'
+,p_last_upd_yyyymmddhh24miss=>'20241012092525'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(17718287670763720)
@@ -14116,13 +14140,14 @@ wwv_flow_api.create_page(
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
 ,p_autocomplete_on_off=>'OFF'
+,p_group_id=>wwv_flow_api.id(26342057431122699)
 ,p_page_template_options=>'#DEFAULT#'
 ,p_dialog_chained=>'Y'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20200705183753'
+,p_last_upd_yyyymmddhh24miss=>'20241012092525'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(17733371937599886)
@@ -14798,7 +14823,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20201218004648'
+,p_last_upd_yyyymmddhh24miss=>'20240515220701'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(17801902566333889)
@@ -14926,6 +14951,177 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_is_default=>'Y'
 ,p_display_rows=>50
 ,p_report_columns=>'DKN:MILEAGE:AMOUNT:F_TOTAL:M_TOTAL:SUM:KM:PRICE_PER_KM:ACTIVE'
+,p_flashback_enabled=>'N'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(26236389189179801)
+,p_plug_name=>'TCO'
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(14778823371053866)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>'SELECT * FROM V_TCO_REPORT'
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_document_header=>'APEX'
+,p_prn_units=>'INCHES'
+,p_prn_paper_size=>'LETTER'
+,p_prn_width=>11
+,p_prn_height=>8.5
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#9bafde'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'normal'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#efefef'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(26236445933179802)
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'N'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>26236445933179802
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26236570403179803)
+,p_db_column_name=>'DKN'
+,p_display_order=>10
+,p_column_identifier=>'A'
+,p_column_label=>'DKN'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26236680638179804)
+,p_db_column_name=>'MILEAGE'
+,p_display_order=>20
+,p_column_identifier=>'B'
+,p_column_label=>'MILEAGE'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26236793528179805)
+,p_db_column_name=>'AMOUNT'
+,p_display_order=>30
+,p_column_identifier=>'C'
+,p_column_label=>'AMOUNT'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26236899221179806)
+,p_db_column_name=>'F_TOTAL'
+,p_display_order=>40
+,p_column_identifier=>'D'
+,p_column_label=>'TOTAL FUEL COST'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26236935545179807)
+,p_db_column_name=>'M_TOTAL'
+,p_display_order=>50
+,p_column_identifier=>'E'
+,p_column_label=>'TOTAL MAINTENANCE COST'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26237094476179808)
+,p_db_column_name=>'SUM'
+,p_display_order=>60
+,p_column_identifier=>'F'
+,p_column_label=>'TCO'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26237103863179809)
+,p_db_column_name=>'KM'
+,p_display_order=>70
+,p_column_identifier=>'G'
+,p_column_label=>'Km'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26237270571179810)
+,p_db_column_name=>'PRICE_PER_KM'
+,p_display_order=>80
+,p_column_identifier=>'H'
+,p_column_label=>'Price Per Km'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26237376445179811)
+,p_db_column_name=>'ACTIVE'
+,p_display_order=>90
+,p_column_identifier=>'I'
+,p_column_label=>'Active'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26237429664179812)
+,p_db_column_name=>'PRICE_PER_MONTH'
+,p_display_order=>100
+,p_column_identifier=>'J'
+,p_column_label=>'Price per month'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26237592720179813)
+,p_db_column_name=>'OWNERSHIP_IN_MONTHS'
+,p_display_order=>110
+,p_column_identifier=>'K'
+,p_column_label=>'Ownership in months'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(26245086908182801)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'262451'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'DKN:MILEAGE:AMOUNT:F_TOTAL:M_TOTAL:SUM:KM:PRICE_PER_KM:ACTIVE:PRICE_PER_MONTH:OWNERSHIP_IN_MONTHS'
 ,p_flashback_enabled=>'N'
 );
 end;
@@ -16896,7 +17092,7 @@ wwv_flow_api.create_page(
 ,p_protection_level=>'C'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20210130104715'
+,p_last_upd_yyyymmddhh24miss=>'20230730104523'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(23016526876524298)
@@ -17032,7 +17228,7 @@ wwv_flow_api.create_page_item(
 '	,ID_CAR',
 '	FROM CARS',
 '    --WHERE ACTIVE = 1',
-'    ORDER BY NAME;',
+'    ORDER BY ACTIVE DESC, NAME;',
 ''))
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
@@ -17390,20 +17586,19 @@ begin
 wwv_flow_api.create_page(
  p_id=>32
 ,p_user_interface_id=>wwv_flow_api.id(14812979676054171)
-,p_name=>'FUEL COMSULPTION'
+,p_name=>'FUEL CONSUMPTION'
 ,p_page_mode=>'NORMAL'
-,p_step_title=>'FUEL COMSULPTION'
+,p_step_title=>'FUEL CONSUMPTION'
 ,p_step_sub_title=>'FUEL COMSULPTION'
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
-,p_dialog_chained=>'Y'
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20201218002927'
+,p_last_upd_yyyymmddhh24miss=>'20231202191759'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(23504807072558855)
@@ -17421,7 +17616,7 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(23505468386558858)
-,p_plug_name=>'FUEL COMSULPTION'
+,p_plug_name=>'FUEL CONSUMPTIONS'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_api.id(14778823371053866)
 ,p_plug_display_sequence=>10
@@ -17439,6 +17634,7 @@ wwv_flow_api.create_page_plug(
 '  from V_FUEL_CONSUMPTION_REPORT'))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 );
 wwv_flow_api.create_worksheet(
  p_id=>wwv_flow_api.id(23505572382558858)
@@ -17547,6 +17743,507 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_is_default=>'Y'
 ,p_display_rows=>50
 ,p_report_columns=>'year:month:MAKE:MODEL:DKN:AMOUNT:MILEAGE:KPL'
+,p_flashback_enabled=>'N'
+);
+end;
+/
+prompt --application/pages/page_00033
+begin
+wwv_flow_api.create_page(
+ p_id=>33
+,p_user_interface_id=>wwv_flow_api.id(14812979676054171)
+,p_name=>'SURPRISE INDEXES'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'SURPRISE INDEXES'
+,p_step_sub_title=>'SURPRISE INDEXES'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_dialog_chained=>'Y'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_last_updated_by=>'GEORGIEM'
+,p_last_upd_yyyymmddhh24miss=>'20241013102523'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(26238127361179819)
+,p_plug_name=>'SURPRISE INDEX MILEAGE'
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(14778823371053866)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>'SELECT CAR, "DATE", MILEAGE, DIFF1, DIFF2, RATIO FROM V_FUEL_SURPRISE_INDEX_MILEAGE;'
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_document_header=>'APEX'
+,p_prn_units=>'INCHES'
+,p_prn_paper_size=>'LETTER'
+,p_prn_width=>11
+,p_prn_height=>8.5
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#9bafde'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'normal'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#efefef'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(26238266552179820)
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'N'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>26238266552179820
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26238450796179822)
+,p_db_column_name=>'CAR'
+,p_display_order=>20
+,p_column_identifier=>'A'
+,p_column_label=>'Car'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26238568198179823)
+,p_db_column_name=>'DATE'
+,p_display_order=>30
+,p_column_identifier=>'B'
+,p_column_label=>'Date'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26238992044179827)
+,p_db_column_name=>'MILEAGE'
+,p_display_order=>40
+,p_column_identifier=>'F'
+,p_column_label=>'Mileage'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26238696565179824)
+,p_db_column_name=>'DIFF1'
+,p_display_order=>50
+,p_column_identifier=>'C'
+,p_column_label=>'Current'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26238738414179825)
+,p_db_column_name=>'DIFF2'
+,p_display_order=>60
+,p_column_identifier=>'D'
+,p_column_label=>'Previous'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26238810701179826)
+,p_db_column_name=>'RATIO'
+,p_display_order=>70
+,p_column_identifier=>'E'
+,p_column_label=>'Ratio'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D0000'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(26373097111084248)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'263731'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'CAR:DATE:MILEAGE:DIFF1:DIFF2:RATIO:'
+,p_sort_column_1=>'DATE'
+,p_sort_direction_1=>'DESC'
+,p_flashback_enabled=>'N'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(26239009135179828)
+,p_plug_name=>'SURPRISE INDEX LKM'
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(14778823371053866)
+,p_plug_display_sequence=>40
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>'SELECT CAR, "DATE", LKM, DIFF1, DIFF2, RATIO FROM V_FUEL_SURPRISE_INDEX_LKM;'
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_document_header=>'APEX'
+,p_prn_units=>'INCHES'
+,p_prn_paper_size=>'LETTER'
+,p_prn_width=>11
+,p_prn_height=>8.5
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#9bafde'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'normal'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#efefef'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(26239194605179829)
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'N'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>26239194605179829
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26239270513179830)
+,p_db_column_name=>'CAR'
+,p_display_order=>10
+,p_column_identifier=>'A'
+,p_column_label=>'Car'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26239328005179831)
+,p_db_column_name=>'DATE'
+,p_display_order=>20
+,p_column_identifier=>'B'
+,p_column_label=>'Date'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26239891336179836)
+,p_db_column_name=>'LKM'
+,p_display_order=>30
+,p_column_identifier=>'F'
+,p_column_label=>'Lkm'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26239435995179832)
+,p_db_column_name=>'DIFF1'
+,p_display_order=>40
+,p_column_identifier=>'C'
+,p_column_label=>'Current'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26239518613179833)
+,p_db_column_name=>'DIFF2'
+,p_display_order=>50
+,p_column_identifier=>'D'
+,p_column_label=>'Previous'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26239685757179834)
+,p_db_column_name=>'RATIO'
+,p_display_order=>60
+,p_column_identifier=>'E'
+,p_column_label=>'Ratio'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D0000'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(26377132947098576)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'263772'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'CAR:DATE:LKM:DIFF1:DIFF2:RATIO:'
+,p_sort_column_1=>'DATE'
+,p_sort_direction_1=>'DESC'
+,p_flashback_enabled=>'N'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(26239977168179837)
+,p_plug_name=>'SURPRISE INDEX EXPENSES'
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(14778823371053866)
+,p_plug_display_sequence=>30
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>'SELECT CAR, "DATE", TOTAL, DIFF1, DIFF2, RATIO FROM V_FUEL_SURPRISE_INDEX_EXPENSES;'
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_document_header=>'APEX'
+,p_prn_units=>'INCHES'
+,p_prn_paper_size=>'LETTER'
+,p_prn_width=>11
+,p_prn_height=>8.5
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#9bafde'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'normal'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#efefef'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(26240080181179838)
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'N'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>26240080181179838
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26240114577179839)
+,p_db_column_name=>'CAR'
+,p_display_order=>10
+,p_column_identifier=>'A'
+,p_column_label=>'Car'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26240298459179840)
+,p_db_column_name=>'DATE'
+,p_display_order=>20
+,p_column_identifier=>'B'
+,p_column_label=>'Date'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26240791436179845)
+,p_db_column_name=>'TOTAL'
+,p_display_order=>30
+,p_column_identifier=>'F'
+,p_column_label=>'Total'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26240302273179841)
+,p_db_column_name=>'DIFF1'
+,p_display_order=>40
+,p_column_identifier=>'C'
+,p_column_label=>'Current'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26240467697179842)
+,p_db_column_name=>'DIFF2'
+,p_display_order=>50
+,p_column_identifier=>'D'
+,p_column_label=>'Previous'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26240543596179843)
+,p_db_column_name=>'RATIO'
+,p_display_order=>60
+,p_column_identifier=>'E'
+,p_column_label=>'Ratio'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D0000'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(26383259445134376)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'263833'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'CAR:DATE:TOTAL:DIFF1:DIFF2:RATIO'
+,p_flashback_enabled=>'N'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(26354239478027467)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(14783779330053869)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(14814249696054309)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(14802613413054040)
+,p_plug_query_row_template=>1
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(44145840459360913)
+,p_plug_name=>'SURPRISE INDEX FUEL'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(14778823371053866)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>'SELECT CAR, "DATE", AMOUNT, DIFF1, DIFF2, RATIO FROM V_FUEL_SURPRISE_INDEX_FUEL;'
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(44145990054360913)
+,p_name=>'TCO'
+,p_max_row_count=>'1000000'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'N'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_owner=>'GEORGIEM'
+,p_internal_uid=>44145990054360913
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26237647721179814)
+,p_db_column_name=>'CAR'
+,p_display_order=>13
+,p_column_identifier=>'J'
+,p_column_label=>'Car'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26237787273179815)
+,p_db_column_name=>'DATE'
+,p_display_order=>33
+,p_column_identifier=>'K'
+,p_column_label=>'Date'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26345933267027379)
+,p_db_column_name=>'AMOUNT'
+,p_display_order=>43
+,p_column_identifier=>'C'
+,p_column_label=>'Amount'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26237851568179816)
+,p_db_column_name=>'DIFF1'
+,p_display_order=>53
+,p_column_identifier=>'L'
+,p_column_label=>'Current'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26237909706179817)
+,p_db_column_name=>'DIFF2'
+,p_display_order=>63
+,p_column_identifier=>'M'
+,p_column_label=>'Previous'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26238000823179818)
+,p_db_column_name=>'RATIO'
+,p_display_order=>73
+,p_column_identifier=>'N'
+,p_column_label=>'Ratio'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D0000'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(44150417223394454)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'263487'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'CAR:DATE:AMOUNT:DIFF1:DIFF2:RATIO:'
+,p_sort_column_1=>'DATE'
+,p_sort_direction_1=>'DESC'
 ,p_flashback_enabled=>'N'
 );
 end;
