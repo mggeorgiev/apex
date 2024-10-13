@@ -1089,3 +1089,98 @@ CREATE OR REPLACE FORCE VIEW  "V_TCO" ("DKN", "MILEAGE", "AMOUNT", "F_TOTAL", "M
     JOIN CARS ON CARS.ID_CAR = f.ID_CAR
     ORDER BY ACTIVE DESC, DKN
 /
+
+-- CREATE Surprise indexe views
+
+CREATE OR REPLACE VIEW V_FUEL_SURPRISE_INDEX_FUEL AS
+SELECT    CAR,
+          "DATE",
+          AMOUNT,
+          diff1,
+          diff2,
+          CASE
+                    WHEN diff2 != 0 THEN diff1 / diff2
+                    ELSE 0 -- You can also replace NULL with 0 or another value if needed
+          END AS ratio
+FROM      (
+          SELECT    CAR,
+                    "DATE",
+                    AMOUNT,
+                    LEAD(AMOUNT, 1) OVER (PARTITION  BY CAR ORDER BY "DATE") AS next_amount, -- Amount of the next row
+                    LEAD(AMOUNT, 2) OVER (PARTITION  BY CAR ORDER BY "DATE") AS next_next_amount, -- Amount of the row after the next one
+                    (AMOUNT - LEAD(AMOUNT, 1) OVER (PARTITION  BY CAR ORDER BY  "DATE")) AS diff1, -- Difference between current and next row
+                    (LEAD(AMOUNT, 1) OVER (PARTITION  BY CAR ORDER BY  "DATE") - LEAD(AMOUNT, 2) OVER (PARTITION  BY CAR ORDER BY  "DATE")) AS diff2 -- Difference between next and next-next row
+          FROM      V_FUEL_REFUEL
+          )
+WHERE     next_amount IS NOT NULL
+AND       next_next_amount IS NOT NULL
+/
+CREATE OR REPLACE VIEW V_FUEL_SURPRISE_INDEX_MILEAGE AS
+SELECT    CAR,
+          "DATE",
+          MILEAGE,
+          diff1,
+          diff2,
+          CASE
+                    WHEN diff2 != 0 THEN diff1 / diff2
+                    ELSE 0 -- You can also replace NULL with 0 or another value if needed
+          END AS ratio
+FROM      (
+          SELECT    CAR,
+                    "DATE",
+                    MILEAGE,
+                    LEAD(MILEAGE, 1) OVER (PARTITION  BY CAR ORDER BY "DATE") AS next_mileage, -- MILEAGE of the next row
+                    LEAD(MILEAGE, 2) OVER (PARTITION  BY CAR ORDER BY "DATE") AS next_next_mileage, -- MILEAGE of the row after the next one
+                    (MILEAGE - LEAD(MILEAGE, 1) OVER (PARTITION  BY CAR ORDER BY  "DATE")) AS diff1, -- Difference between current and next row
+                    (LEAD(MILEAGE, 1) OVER (PARTITION  BY CAR ORDER BY  "DATE") - LEAD(MILEAGE, 2) OVER (PARTITION  BY CAR ORDER BY  "DATE")) AS diff2 -- Difference between next and next-next row
+          FROM      V_FUEL_REFUEL
+          )
+WHERE     next_mileage IS NOT NULL
+AND       next_next_mileage IS NOT NULL
+/
+CREATE OR REPLACE VIEW V_FUEL_SURPRISE_INDEX_LKM AS
+SELECT    CAR,
+          "DATE",
+          LKM,
+          diff1,
+          diff2,
+          CASE
+                    WHEN diff2 != 0 THEN diff1 / diff2
+                    ELSE 0 -- You can also replace NULL with 0 or another value if needed
+          END AS ratio
+FROM      (
+          SELECT    CAR,
+                    "DATE",
+                    LKM,
+                    LEAD(LKM, 1) OVER (PARTITION  BY CAR ORDER BY "DATE") AS next_LKM, -- LKM of the next row
+                    LEAD(LKM, 2) OVER (PARTITION  BY CAR ORDER BY "DATE") AS next_next_LKM, -- LKM of the row after the next one
+                    (LKM - LEAD(LKM, 1) OVER (PARTITION  BY CAR ORDER BY  "DATE")) AS diff1, -- Difference between current and next row
+                    (LEAD(LKM, 1) OVER (PARTITION  BY CAR ORDER BY  "DATE") - LEAD(LKM, 2) OVER (PARTITION  BY CAR ORDER BY  "DATE")) AS diff2 -- Difference between next and next-next row
+          FROM      V_FUEL_REFUEL
+          )
+WHERE     next_LKM IS NOT NULL
+AND       next_next_LKM IS NOT NULL
+/
+CREATE OR REPLACE VIEW V_FUEL_SURPRISE_INDEX_EXPENSES AS
+SELECT    CAR,
+          "DATE",
+          TOTAL,
+          diff1,
+          diff2,
+          CASE
+                    WHEN diff2 != 0 THEN diff1 / diff2
+                    ELSE 0 -- You can also replace NULL with 0 or another value if needed
+          END AS ratio
+FROM      (
+          SELECT    CAR,
+                    "DATE",
+                    TOTAL,
+                    LEAD(TOTAL, 1) OVER (PARTITION  BY CAR ORDER BY "DATE") AS next_TOTAL, -- TOTAL of the next row
+                    LEAD(TOTAL, 2) OVER (PARTITION  BY CAR ORDER BY "DATE") AS next_next_TOTAL, -- TOTAL of the row after the next one
+                    (TOTAL - LEAD(TOTAL, 1) OVER (PARTITION  BY CAR ORDER BY  "DATE")) AS diff1, -- Difference between current and next row
+                    (LEAD(TOTAL, 1) OVER (PARTITION  BY CAR ORDER BY  "DATE") - LEAD(TOTAL, 2) OVER (PARTITION  BY CAR ORDER BY  "DATE")) AS diff2 -- Difference between next and next-next row
+          FROM      V_FUEL_REFUEL
+          )
+WHERE     next_TOTAL IS NOT NULL
+AND       next_next_TOTAL IS NOT NULL
+/
