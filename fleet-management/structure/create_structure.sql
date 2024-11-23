@@ -915,13 +915,14 @@ CREATE OR REPLACE FORCE VIEW  "NEXT_REFUEL" ("ID_CAR", "DKN", "PREVIOUS_DATE", "
         AND mx.ID_CAR = kms.ID_CAR
         AND CARS.ACTIVE=1
 /
-CREATE OR REPLACE FORCE VIEW  "V_FUEL_CONSUMPTION_REPORT" ("year", "month", "MAKE", "MODEL", "DKN", "AMOUNT", "MILEAGE", "KPL") AS 
+CREATE OR REPLACE FORCE VIEW  "V_FUEL_CONSUMPTION_REPORT" ("year", "month", "MAKE", "MODEL", "DKN", "COST","AMOUNT", "MILEAGE", "KPL") AS 
   SELECT
         CALENDAR.YEAR_COL as "year"
         ,CALENDAR.MONTH_COL as "month"
         ,make
         ,model
         ,dkn
+        ,sum(TOTAL) AS cost
         ,sum(AMOUNT) as amount
         ,sum(MILEAGE) as mileage
         ,round(sum(AMOUNT)/sum(MILEAGE)*100,2) as kpl
@@ -931,7 +932,13 @@ CREATE OR REPLACE FORCE VIEW  "V_FUEL_CONSUMPTION_REPORT" ("year", "month", "MAK
         CARS       ON FUEL.ID_CAR = CARS.ID_CAR
     JOIN
         CALENDAR   ON CALENDAR.DATE_COL = FUEL.DATE_COL
-    GROUP by CALENDAR.YEAR_COL, CALENDAR.MONTH_COL, make, model, dkn  
+GROUP BY  ROLLUP (
+          CALENDAR.YEAR_COL,
+          CALENDAR.MONTH_COL,
+          make,
+          model,
+          dkn
+          )
     order by CALENDAR.YEAR_COL DESC, CALENDAR.MONTH_COL
 /
 CREATE OR REPLACE FORCE VIEW  "V_FUEL_CONS_PER_DRVTYPE" ("YEAR", "MONTH", "DKN", "DRIVE_TYPE", "TOTAL", "AMOUNT", "MILEAGE", "l/100km") AS 
