@@ -17628,6 +17628,7 @@ wwv_flow_api.create_page_plug(
 '       MAKE,',
 '       MODEL,',
 '       DKN,',
+'       COST,',
 '       AMOUNT,',
 '       MILEAGE,',
 '       KPL',
