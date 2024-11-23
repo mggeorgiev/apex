@@ -27,7 +27,7 @@ prompt APPLICATION 106 - FLEET MANAGEMENT
 -- Application Export:
 --   Application:     106
 --   Name:            FLEET MANAGEMENT
---   Date and Time:   10:26 Sunday October 13, 2024
+--   Date and Time:   07:47 Saturday November 23, 2024
 --   Exported By:     GEORGIEM
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -112,7 +112,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20241013102523'
+,p_last_upd_yyyymmddhh24miss=>'20241123074136'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -17598,7 +17598,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'GEORGIEM'
-,p_last_upd_yyyymmddhh24miss=>'20231202191759'
+,p_last_upd_yyyymmddhh24miss=>'20241123074136'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(23504807072558855)
@@ -17735,6 +17735,15 @@ wwv_flow_api.create_worksheet_column(
 ,p_heading_alignment=>'RIGHT'
 ,p_column_alignment=>'RIGHT'
 );
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(26240836609179846)
+,p_db_column_name=>'COST'
+,p_display_order=>18
+,p_column_identifier=>'I'
+,p_column_label=>'Cost'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
 wwv_flow_api.create_worksheet_rpt(
  p_id=>wwv_flow_api.id(23509372179563412)
 ,p_application_user=>'APXWS_DEFAULT'
@@ -17743,7 +17752,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'year:month:MAKE:MODEL:DKN:AMOUNT:MILEAGE:KPL'
+,p_report_columns=>'year:month:MAKE:MODEL:DKN:AMOUNT:MILEAGE:KPL:COST'
 ,p_flashback_enabled=>'N'
 );
 end;
